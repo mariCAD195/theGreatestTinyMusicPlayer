@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +26,7 @@ public class GUI extends JFrame {
     public GUI() {
 
         //JFrame configuration
-        super("pisnicky pro tonika ale vic cute :)");
+        super("well hello there");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400,600);
         setLocationRelativeTo(null);
@@ -33,15 +34,8 @@ public class GUI extends JFrame {
         setResizable(false);
 
         //set windowIcon
-        InputStream inputStream;
-        try {
-            inputStream = getClass().getResourceAsStream("/assets/heartIcon.png");
-            BufferedImage windowImage = ImageIO.read(inputStream);
-            ImageIcon icon = new ImageIcon(windowImage);
-            setIconImage(icon.getImage());
-        } catch (Exception e) {
-            System.out.println("Image not found");
-        }
+        ImageIcon icon = loadImage("assets/art/heartIcon.png",60,60);
+        setIconImage(icon.getImage());
 
         musicPlayer = new MusicPlayer();
         defaultGUI();
@@ -56,7 +50,7 @@ public class GUI extends JFrame {
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0,0,getWidth(),getHeight());
 
-        vinyl = new JLabel(loadImage("src/assets/defaultVinyl.png",300,300));
+        vinyl = new JLabel(loadImage("assets/art/defaultVinyl.png",300,300));
         vinyl.setBounds(0,0,400,350);
         layeredPane.add(vinyl,Integer.valueOf(1));
 
@@ -99,7 +93,7 @@ public class GUI extends JFrame {
         buttonPanel.setBounds(0,470,390,80);
 
         //play button - loads the playlist and plays songs, updates gui to song specific assets
-        JButton playButton = new JButton(loadImage("src/assets/defaultPlayButton.png",50,50));
+        JButton playButton = new JButton(loadImage("assets/art/defaultPlayButton.png",50,50));
         playButton.setOpaque(false);
         playButton.setBackground(null);
         playButton.setFocusPainted(false);
@@ -196,7 +190,8 @@ public class GUI extends JFrame {
         Font font = null;
         try {
             InputStream inputStream = getClass().getResourceAsStream(path);
-            font = Font.createFont(Font.TRUETYPE_FONT,inputStream).deriveFont(size);
+            BufferedInputStream bis = new BufferedInputStream(inputStream);
+            font = Font.createFont(Font.TRUETYPE_FONT,bis).deriveFont(size);
         } catch (FontFormatException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

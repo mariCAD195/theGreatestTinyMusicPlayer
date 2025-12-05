@@ -21,7 +21,7 @@ public class MusicPlayer {
      */
     public Playlist loadPlaylist() {
         playlist.addSong("Death Bed",new Song("Death Bed","POWFU","2:50","/musicFiles/Powfu - death bed (coffee for your head).wav"));
-        playlist.getTonikuvPlaylist().get("Death Bed").setAssetPaths("src/assets/deathBedBackground.png","src/assets/deathBed_Vinyl.png","/fonts/Daydream DEMO.otf");
+        playlist.getTonikuvPlaylist().get("Death Bed").setAssetPaths("assets/art/deathBedBackground.png","assets/art/deathBed_Vinyl.png","/fonts/Daydream DEMO.otf");
 
         return playlist;
     }
