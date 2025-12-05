@@ -104,12 +104,17 @@ public class GUI extends JFrame {
         buttonPanel.add(playButton);
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                musicPlayer.loadPlaylist();
-                for (int i = 0; i < musicPlayer.getPlaylist().getTonikuvPlaylist().size(); i++) {
-                    musicPlayer.loadSong(musicPlayer.getPlaylist(), musicPlayer.getPlaylist().getSongByNumber(i));
+                if(!musicPlayer.isPlaying()){
+                    musicPlayer.loadPlaylist();
+                    musicPlayer.loadSong(musicPlayer.getPlaylist(), musicPlayer.getPlaylist().getSongByNumber(musicPlayer.getCurrentSongIndex()));
                     musicPlayer.playSong();
-                    updateGUI(musicPlayer.getPlaylist(), musicPlayer.getPlaylist().getSongByNumber(i));
+                    updateGUI(musicPlayer.getPlaylist(), musicPlayer.getPlaylist().getSongByNumber(musicPlayer.getCurrentSongIndex()));
+                    PAUSEonPlayOff();
+                }else{
+                    musicPlayer.resume();
+                    PAUSEonPlayOff();
                 }
+
             }
         });
 
@@ -122,6 +127,12 @@ public class GUI extends JFrame {
         pauseButton.setBorderPainted(false);
         pauseButton.setContentAreaFilled(false);
         buttonPanel.add(pauseButton);
+        pauseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                musicPlayer.pause();
+                PLAYonPauseOff();
+            }
+        });
 
         add(buttonPanel);
     }
@@ -134,7 +145,7 @@ public class GUI extends JFrame {
         playButton.setEnabled(true);
     }
 
-    public void PAUSEoffPlayOn(){
+    public void PAUSEonPlayOff(){
         playButton.setVisible(false);
         playButton.setEnabled(false);
 
