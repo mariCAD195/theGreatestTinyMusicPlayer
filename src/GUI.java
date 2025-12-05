@@ -114,7 +114,6 @@ public class GUI extends JFrame {
                     musicPlayer.resume();
                     PAUSEonPlayOff();
                 }
-
             }
         });
 

@@ -51,6 +51,14 @@ public class MusicPlayer {
                 clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
+                /*clip.addLineListener(new LineListener() {
+                    @Override
+                    public void update(LineEvent event) {
+                        if (event.getType() != LineEvent.Type.STOP&&!isPaused) {
+                            songFinished();
+                        }
+                    }
+                });*/
             } catch (UnsupportedAudioFileException e) {
                 System.out.println("Unsupported audio file");
             } catch (IOException e) {
@@ -62,12 +70,22 @@ public class MusicPlayer {
         }).start();
     }
 
+    /*public void songFinished() {
+        isPlaying = false;
+        if (currentSongIndex < playlist.getTonikuvPlaylist().size()) {
+            String next = playlist.getSongByNumber(currentSongIndex);
+            loadSong(playlist, next);
+            currentSongIndex++;
+
+            playSong();
+        }
+    }*/
+
     public void pause() {
         if (clip != null && clip.isRunning()) {
             pausePosition = clip.getMicrosecondPosition();
             clip.stop();
             isPaused = true;
-            System.out.println("Paused at: " + pausePosition);
         }
     }
 
@@ -76,7 +94,6 @@ public class MusicPlayer {
             clip.setMicrosecondPosition(pausePosition);
             clip.start();
             isPaused = false;
-            System.out.println("Resumed from: " + pausePosition);
         }
     }
 
