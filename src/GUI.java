@@ -19,6 +19,8 @@ public class GUI extends JFrame {
     private JLabel songTitle;
     private JLabel songArtist;
     private JSlider playbackSlider;
+    private JButton playButton;
+    private JButton pauseButton;
 
     /**
      * JFrame setup
@@ -93,7 +95,7 @@ public class GUI extends JFrame {
         buttonPanel.setBounds(0,470,390,80);
 
         //play button - loads the playlist and plays songs, updates gui to song specific assets
-        JButton playButton = new JButton(loadImage("assets/art/defaultPlayButton.png",50,50));
+        playButton = new JButton(loadImage("assets/art/defaultPlayButton.png",50,50));
         playButton.setOpaque(false);
         playButton.setBackground(null);
         playButton.setFocusPainted(false);
@@ -111,7 +113,33 @@ public class GUI extends JFrame {
             }
         });
 
+        //pause button - stops the music
+        pauseButton = new JButton(loadImage("assets/art/defaultPauseButton.png",50,50));
+        pauseButton.setVisible(false);
+        pauseButton.setOpaque(false);
+        pauseButton.setBackground(null);
+        pauseButton.setFocusPainted(false);
+        pauseButton.setBorderPainted(false);
+        pauseButton.setContentAreaFilled(false);
+        buttonPanel.add(pauseButton);
+
         add(buttonPanel);
+    }
+
+    public void PLAYonPauseOff(){
+        pauseButton.setVisible(false);
+        pauseButton.setEnabled(false);
+
+        playButton.setVisible(true);
+        playButton.setEnabled(true);
+    }
+
+    public void PAUSEoffPlayOn(){
+        playButton.setVisible(false);
+        playButton.setEnabled(false);
+
+        pauseButton.setVisible(true);
+        pauseButton.setEnabled(true);
     }
 
     /**
