@@ -163,37 +163,42 @@ public class GUI extends JFrame {
             remove(layeredPane);
         }
 
-        layeredPane = new JLayeredPane();
-        layeredPane.setBounds(0,0,getWidth(),getHeight());
+        if (musicPlayer.getPlaylist().getTonikuvPlaylist().get(musicPlayer.getPlaylist().getSongByNumber(musicPlayer.getCurrentSongIndex())).getSongsAssets()!=null) {
 
-        //adds the music player background for the currently playing song
-        if (playlist.getTonikuvPlaylist().get(name).songsBackgroundImage() != null) {
-            backgroundImage = new JLabel(loadImage(playlist.getTonikuvPlaylist().get(name).songsBackgroundImage(),400,600));
-            backgroundImage.setBounds(0,0,getWidth(),getHeight());
-            layeredPane.add(backgroundImage,Integer.valueOf(0));
+            layeredPane = new JLayeredPane();
+            layeredPane.setBounds(0,0,getWidth(),getHeight());
+
+            //adds the music player background for the currently playing song
+            if (playlist.getTonikuvPlaylist().get(name).songsBackgroundImage() != null) {
+                backgroundImage = new JLabel(loadImage(playlist.getTonikuvPlaylist().get(name).songsBackgroundImage(), 400, 600));
+                backgroundImage.setBounds(0, 0, getWidth(), getHeight());
+                layeredPane.add(backgroundImage, Integer.valueOf(0));
+            }
+
+            //adds the vinyl for the currently playing song
+            if (playlist.getTonikuvPlaylist().get(name).songsVinyl() != null) {
+                vinyl = new JLabel(loadImage(playlist.getTonikuvPlaylist().get(name).songsVinyl(), 300, 300));
+                vinyl.setBounds(0, 0, 400, 350);
+                layeredPane.add(vinyl, Integer.valueOf(1));
+            }
+
+            //updates to currently playing song's title, artist and font
+            if (playlist.getTonikuvPlaylist().get(name).songsFont() != null) {
+                songTitle.setText(playlist.getTonikuvPlaylist().get(name).getSongTitle());
+                songTitle.setFont(loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(), 30));
+                songTitle.setForeground(new Color(0, 0, 0));
+                layeredPane.add(songTitle, Integer.valueOf(2));
+
+                songArtist.setText(playlist.getTonikuvPlaylist().get(name).getSongArtist());
+                songArtist.setFont(loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(), 20));
+                songArtist.setForeground(new Color(0, 0, 0));
+                layeredPane.add(songArtist, Integer.valueOf(3));
+            }
+
+            add(layeredPane);
+        }else{
+            defaultGUI();
         }
-
-        //adds the vinyl for the currently playing song
-        if (playlist.getTonikuvPlaylist().get(name).songsVinyl() != null) {
-            vinyl = new JLabel(loadImage(playlist.getTonikuvPlaylist().get(name).songsVinyl(),300,300));
-            vinyl.setBounds(0,0,400,350);
-            layeredPane.add(vinyl,Integer.valueOf(1));
-        }
-
-        //updates to currently playing song's title, artist and font
-        if (playlist.getTonikuvPlaylist().get(name).songsFont() != null) {
-            songTitle.setText(playlist.getTonikuvPlaylist().get(name).getSongTitle());
-            songTitle.setFont(loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(),30));
-            songTitle.setForeground(new Color(0,0,0));
-            layeredPane.add(songTitle,Integer.valueOf(2));
-
-            songArtist.setText(playlist.getTonikuvPlaylist().get(name).getSongArtist());
-            songArtist.setFont(loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(),20));
-            songArtist.setForeground(new Color(0,0,0));
-            layeredPane.add(songArtist,Integer.valueOf(3));
-        }
-
-        add(layeredPane);
         layeredPane.revalidate();
         layeredPane.repaint();
         repaint();

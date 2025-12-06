@@ -77,6 +77,11 @@ public class MusicPlayer {
     public void songFinished() {
         isPlaying = false;
         if (currentSongIndex < playlist.getTonikuvPlaylist().size()) {
+            if (clip != null) {
+                clip.stop();
+                clip.close();
+                clip = null;
+            }
             String next = playlist.getSongByNumber(currentSongIndex+1);
             loadSong(playlist, next);
             currentSongIndex++;
