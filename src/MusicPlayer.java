@@ -51,14 +51,18 @@ public class MusicPlayer {
                 clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
-                /*clip.addLineListener(new LineListener() {
+                clip.addLineListener(new LineListener() {
                     @Override
                     public void update(LineEvent event) {
-                        if (event.getType() != LineEvent.Type.STOP&&!isPaused) {
-                            songFinished();
+                        if (event.getType() == LineEvent.Type.STOP&&!isPaused) {
+                            double position = (double) clip.getMicrosecondPosition();
+                            double length = (double) clip.getMicrosecondLength();
+                            if (position >= length - 1000) {
+                                songFinished();
+                            }
                         }
                     }
-                });*/
+                });
             } catch (UnsupportedAudioFileException e) {
                 System.out.println("Unsupported audio file");
             } catch (IOException e) {
@@ -70,16 +74,16 @@ public class MusicPlayer {
         }).start();
     }
 
-    /*public void songFinished() {
+    public void songFinished() {
         isPlaying = false;
         if (currentSongIndex < playlist.getTonikuvPlaylist().size()) {
-            String next = playlist.getSongByNumber(currentSongIndex);
+            String next = playlist.getSongByNumber(currentSongIndex+1);
             loadSong(playlist, next);
             currentSongIndex++;
 
             playSong();
         }
-    }*/
+    }
 
     public void pause() {
         if (clip != null && clip.isRunning()) {
