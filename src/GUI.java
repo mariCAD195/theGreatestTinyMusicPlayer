@@ -21,28 +21,29 @@ public class GUI extends JFrame {
     private JSlider playbackSlider;
     private JButton playButton;
     private JButton pauseButton;
+    private DataLoading dataLoading;
 
     /**
      * JFrame setup
      */
     public GUI() {
-
         //JFrame configuration
         super("well hello there");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400,600);
+        setSize(400,700);
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
 
+        dataLoading = new DataLoading();
+
         //set windowIcon
-        ImageIcon icon = loadImage("assets/art/heartIcon.png",60,60);
+        ImageIcon icon = dataLoading.loadAssets("res/assets/art/heartIcon.png",60,60);
         setIconImage(icon.getImage());
 
         musicPlayer = new MusicPlayer();
         defaultGUI();
         addButtons();
-
     }
 
     /**
@@ -52,14 +53,14 @@ public class GUI extends JFrame {
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0,0,getWidth(),getHeight());
 
-        vinyl = new JLabel(loadImage("assets/art/defaultVinyl.png",300,300));
+        vinyl = new JLabel(dataLoading.loadAssets("res/assets/art/defaultVinyl.png",300,300));
         vinyl.setBounds(0,0,400,350);
         layeredPane.add(vinyl,Integer.valueOf(1));
 
         songTitle = new JLabel();
         songTitle.setBounds(0,330,getWidth()-10,50);
         songTitle.setText("Song Title");
-        songTitle.setFont(loadFont("/fonts/Pixellari.ttf",30));
+        songTitle.setFont(dataLoading.loadFont("res/fonts/Pixellari.ttf",30));
         songTitle.setForeground(Color.BLACK);
         songTitle.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.add(songTitle,Integer.valueOf(2));
@@ -67,7 +68,7 @@ public class GUI extends JFrame {
         songArtist = new JLabel();
         songArtist.setBounds(0,370,getWidth()-10,50);
         songArtist.setText("Song Artist");
-        songArtist.setFont(loadFont("/fonts/Pixellari.ttf",20));
+        songArtist.setFont(dataLoading.loadFont("/res/fonts/Pixellari.ttf",20));
         songArtist.setForeground(Color.BLACK);
         songArtist.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.add(songArtist,Integer.valueOf(3));
@@ -95,7 +96,7 @@ public class GUI extends JFrame {
         buttonPanel.setBounds(0,470,390,80);
 
         //play button - loads the playlist and plays songs, updates gui to song specific assets
-        playButton = new JButton(loadImage("assets/art/defaultPlayButton.png",50,50));
+        playButton = new JButton(dataLoading.loadAssets("res/assets/art/defaultPlayButton.png",50,50));
         playButton.setOpaque(false);
         playButton.setBackground(null);
         playButton.setFocusPainted(false);
@@ -118,7 +119,7 @@ public class GUI extends JFrame {
         });
 
         //pause button - stops the music
-        pauseButton = new JButton(loadImage("assets/art/defaultPauseButton.png",50,50));
+        pauseButton = new JButton(dataLoading.loadAssets("res/assets/art/defaultPauseButton.png",50,50));
         pauseButton.setVisible(false);
         pauseButton.setOpaque(false);
         pauseButton.setBackground(null);
@@ -170,14 +171,14 @@ public class GUI extends JFrame {
 
             //adds the music player background for the currently playing song
             if (playlist.getTonikuvPlaylist().get(name).songsBackgroundImage() != null) {
-                backgroundImage = new JLabel(loadImage(playlist.getTonikuvPlaylist().get(name).songsBackgroundImage(), 400, 600));
-                backgroundImage.setBounds(0, 0, getWidth(), getHeight());
+                backgroundImage = new JLabel(dataLoading.loadAssets(playlist.getTonikuvPlaylist().get(name).songsBackgroundImage(), 400, 700));
+                backgroundImage.setBounds(0, -37, getWidth(), getHeight());
                 layeredPane.add(backgroundImage, Integer.valueOf(0));
             }
 
             //adds the vinyl for the currently playing song
             if (playlist.getTonikuvPlaylist().get(name).songsVinyl() != null) {
-                vinyl = new JLabel(loadImage(playlist.getTonikuvPlaylist().get(name).songsVinyl(), 300, 300));
+                vinyl = new JLabel(dataLoading.loadAssets(playlist.getTonikuvPlaylist().get(name).songsVinyl(), 300, 300));
                 vinyl.setBounds(0, 0, 400, 350);
                 layeredPane.add(vinyl, Integer.valueOf(1));
             }
@@ -185,12 +186,12 @@ public class GUI extends JFrame {
             //updates to currently playing song's title, artist and font
             if (playlist.getTonikuvPlaylist().get(name).songsFont() != null) {
                 songTitle.setText(playlist.getTonikuvPlaylist().get(name).getSongTitle());
-                songTitle.setFont(loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(), 30));
+                songTitle.setFont(dataLoading.loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(), 30));
                 songTitle.setForeground(new Color(0, 0, 0));
                 layeredPane.add(songTitle, Integer.valueOf(2));
 
                 songArtist.setText(playlist.getTonikuvPlaylist().get(name).getSongArtist());
-                songArtist.setFont(loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(), 20));
+                songArtist.setFont(dataLoading.loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(), 20));
                 songArtist.setForeground(new Color(0, 0, 0));
                 layeredPane.add(songArtist, Integer.valueOf(3));
             }
@@ -204,43 +205,6 @@ public class GUI extends JFrame {
         repaint();
         revalidate();
 
-    }
-
-    /**
-     * loads images into image icons
-     * @param path absolute path to the loaded image
-     * @param width scale image to this width
-     * @param height scale image to this height
-     * @return new image icon scaled properly
-     */
-    public ImageIcon loadImage(String path, int width, int height){
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (Exception e) {
-            System.out.println("Error loading image " + path);
-        }
-        return new ImageIcon(image.getScaledInstance(width,height, BufferedImage.SCALE_SMOOTH));
-    }
-
-    /**
-     * loads custom fonts
-     * @param path path to the loaded font
-     * @param size font size we want to use
-     * @return new custom font
-     */
-    public Font loadFont(String path, float size){
-        Font font = null;
-        try {
-            InputStream inputStream = getClass().getResourceAsStream(path);
-            BufferedInputStream bis = new BufferedInputStream(inputStream);
-            font = Font.createFont(Font.TRUETYPE_FONT,bis).deriveFont(size);
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            System.out.println("Error loading font " + path);
-        }
-        return font;
     }
 }
 

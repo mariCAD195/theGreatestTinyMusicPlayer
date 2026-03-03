@@ -24,9 +24,9 @@ public class MusicPlayer {
      * @return created playlist
      */
     public Playlist loadPlaylist() {
-        playlist.addSong("Death Bed",new Song("Death Bed","POWFU","2:50","/musicFiles/Powfu - death bed (coffee for your head).wav"));
-        playlist.getTonikuvPlaylist().get("Death Bed").setAssetPaths("assets/art/deathBedBackground.png","assets/art/deathBed_Vinyl.png","/fonts/Daydream DEMO.otf");
-        playlist.addSong("Californication", new Song("Californication","Red Hot Chili Peppers", "5:29","/musicFiles/Red Hot Chili Peppers - Californication.wav"));
+        playlist.addSong("Death Bed",new Song("Death Bed","POWFU","2:50", "res/musicFiles/Powfu - death bed (coffee for your head).wav"));
+        playlist.getTonikuvPlaylist().get("Death Bed").setAssetPaths("res/assets/art/deathBedBackground.png","res/assets/art/deathBed_Vinyl.png", "res/fonts/Daydream DEMO.otf");
+        playlist.addSong("Californication", new Song("Californication","Red Hot Chili Peppers", "5:29", "res/musicFiles/Red Hot Chili Peppers - Californication.wav"));
 
         return playlist;
     }
