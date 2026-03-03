@@ -12,11 +12,13 @@ public class MusicPlayer {
     private boolean isPlaying;
     Playlist playlist;
     private int currentSongIndex;
+    private DataLoading dataLoading;
 
     public MusicPlayer() {
         playlist = new Playlist();
         isPlaying = false;
         currentSongIndex = 0;
+        dataLoading = new DataLoading();
     }
 
     /**
@@ -24,8 +26,8 @@ public class MusicPlayer {
      * @return created playlist
      */
     public Playlist loadPlaylist() {
-        playlist.addSong("Death Bed",new Song("Death Bed","POWFU","2:50", "res/musicFiles/Powfu - death bed (coffee for your head).wav"));
-        playlist.getTonikuvPlaylist().get("Death Bed").setAssetPaths("res/assets/art/deathBedBackground.png","res/assets/art/deathBed_Vinyl.png", "res/fonts/Daydream DEMO.otf");
+        playlist.addSong("Death Bed",new Song("Death Bed","POWFU","2:50", "/musicFiles/Powfu - death bed (coffee for your head).wav"));
+        playlist.getTonikuvPlaylist().get("Death Bed").setAssetPaths("res/assets/art/deathBedBackground.png","res/assets/art/deathBed_Vinyl.png", "/fonts/Daydream DEMO.otf");
         playlist.addSong("Californication", new Song("Californication","Red Hot Chili Peppers", "5:29", "res/musicFiles/Red Hot Chili Peppers - Californication.wav"));
 
         return playlist;
@@ -43,13 +45,8 @@ public class MusicPlayer {
         isPlaying = true;
         new Thread(() -> {
             try {
-                InputStream inputStream = getClass().getResourceAsStream(currentSong.getFilePath());
-
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedInputStream);
-
                 clip = AudioSystem.getClip();
-                clip.open(audioInputStream);
+                clip.open(dataLoading.loadSong(currentSong.getFilePath()));
                 clip.start();
                 clip.addLineListener(new LineListener() {
                     @Override
@@ -63,8 +60,6 @@ public class MusicPlayer {
                         }
                     }
                 });
-            } catch (UnsupportedAudioFileException e) {
-                System.out.println("Unsupported audio file");
             } catch (IOException e) {
                 System.out.println("IO exception");
             } catch (LineUnavailableException e) {

@@ -60,7 +60,7 @@ public class GUI extends JFrame {
         songTitle = new JLabel();
         songTitle.setBounds(0,330,getWidth()-10,50);
         songTitle.setText("Song Title");
-        songTitle.setFont(dataLoading.loadFont("res/fonts/Pixellari.ttf",30));
+        songTitle.setFont(dataLoading.loadFont("/fonts/Pixellari.ttf",30));
         songTitle.setForeground(Color.BLACK);
         songTitle.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.add(songTitle,Integer.valueOf(2));
@@ -68,7 +68,7 @@ public class GUI extends JFrame {
         songArtist = new JLabel();
         songArtist.setBounds(0,370,getWidth()-10,50);
         songArtist.setText("Song Artist");
-        songArtist.setFont(dataLoading.loadFont("/res/fonts/Pixellari.ttf",20));
+        songArtist.setFont(dataLoading.loadFont("/fonts/Pixellari.ttf",20));
         songArtist.setForeground(Color.BLACK);
         songArtist.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.add(songArtist,Integer.valueOf(3));
@@ -195,6 +195,14 @@ public class GUI extends JFrame {
                 songArtist.setForeground(new Color(0, 0, 0));
                 layeredPane.add(songArtist, Integer.valueOf(3));
             }
+
+            playbackSlider = new JSlider(JSlider.HORIZONTAL,0,100,0);
+            playbackSlider.setBounds(getWidth()/2 - 300/2, 420, 300, 40);
+            playbackSlider.setBackground(null);
+            playbackSlider.setSnapToTicks(false);
+            playbackSlider.setFocusable(false);
+            playbackSlider.setForeground(Color.BLACK);
+            layeredPane.add(playbackSlider);
 
             add(layeredPane);
         }else{

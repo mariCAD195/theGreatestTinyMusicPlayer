@@ -1,4 +1,7 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -44,6 +47,20 @@ public class DataLoading {
             System.out.println("couldn't load this: "+path);
         }
         return font;
+    }
+
+    public AudioInputStream loadSong(String path){
+        InputStream inputStream = getClass().getResourceAsStream(path);
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+        AudioInputStream audioInputStream;
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(bufferedInputStream);
+        } catch (UnsupportedAudioFileException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return audioInputStream;
     }
 
 }
