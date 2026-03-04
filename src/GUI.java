@@ -47,8 +47,9 @@ public class GUI extends JFrame {
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0,0,getWidth(),getHeight());
 
-        vinyl = new Vinyl("res/assets/defaultVinyl.png");
-        layeredPane.add(vinyl.getVinylRecord(),Integer.valueOf(1));
+        vinyl = new Vinyl("/assets/defaultVinyl.png");
+        vinyl.setBounds(0, 0, 400, 400);
+        layeredPane.add(vinyl,Integer.valueOf(1));
 
         songTitle = new JLabel();
         songTitle.setBounds(0,410,getWidth()-10,50);
@@ -112,9 +113,11 @@ public class GUI extends JFrame {
                     musicPlayer.playSong();
                     updateGUI(musicPlayer.getPlaylist(), musicPlayer.getPlaylist().getSongByNumber(musicPlayer.getCurrentSongIndex()));
                     PAUSEonPlayOff();
+                    vinyl.startSpinning();
                 }else{
                     musicPlayer.resume();
                     PAUSEonPlayOff();
+                    vinyl.startSpinning();
                 }
             }
         });
@@ -131,6 +134,7 @@ public class GUI extends JFrame {
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 musicPlayer.pause();
+                vinyl.stopSpinning();
                 PLAYonPauseOff();
             }
         });
@@ -189,7 +193,8 @@ public class GUI extends JFrame {
             //adds the vinyl for the currently playing song
             if (playlist.getTonikuvPlaylist().get(name).songsVinyl() != null) {
                 vinyl = new Vinyl(playlist.getTonikuvPlaylist().get(name).songsVinyl());
-                layeredPane.add(vinyl.getVinylRecord(), Integer.valueOf(1));
+                vinyl.setBounds(0, 0, 400, 400);
+                layeredPane.add(vinyl, Integer.valueOf(1));
             }
 
             //updates to currently playing song's title, artist and font

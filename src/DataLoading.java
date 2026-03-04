@@ -29,6 +29,15 @@ public class DataLoading {
         return new ImageIcon(image.getScaledInstance(width,height, BufferedImage.SCALE_SMOOTH));
     }
 
+    public static BufferedImage loadBufferedImage(String path) {
+        try {
+            return ImageIO.read(DataLoading.class.getResource(path));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * loads custom fonts
      * @param path path to the loaded font
