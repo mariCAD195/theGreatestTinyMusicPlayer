@@ -1,13 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class GUI extends JFrame {
 
@@ -77,7 +71,7 @@ public class GUI extends JFrame {
 
         playbackSlider = new JSlider(JSlider.HORIZONTAL,0,100,0);
         playbackSlider.setBounds(getWidth()/2 - 300/2, 470, 300, 40);
-        playbackSlider.setUI(new Slider(playbackSlider,new Color(199, 199, 130)));
+        playbackSlider.setUI(new SliderUI(playbackSlider,new Color(199, 199, 130)));
         playbackSlider.setBackground(null);
         playbackSlider.setSnapToTicks(false);
         playbackSlider.setFocusable(false);
@@ -218,7 +212,7 @@ public class GUI extends JFrame {
 
             playbackSlider = new JSlider(JSlider.HORIZONTAL,0,100,0);
             playbackSlider.setBounds(getWidth()/2 - 300/2, 470, 300, 40);
-            playbackSlider.setUI(new Slider(playbackSlider,playlist.getTonikuvPlaylist().get(name).getProgressBarColor()));
+            playbackSlider.setUI(new SliderUI(playbackSlider,playlist.getTonikuvPlaylist().get(name).getProgressBarColor()));
             playbackSlider.setOpaque(false);
             playbackSlider.setBackground(null);
             playbackSlider.setSnapToTicks(false);
