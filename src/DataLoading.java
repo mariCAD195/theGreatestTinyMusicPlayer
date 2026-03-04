@@ -19,7 +19,7 @@ public class DataLoading {
      * @param height scale image to this height
      * @return new image icon scaled properly
      */
-    public ImageIcon loadAssets(String path, int width, int height){
+    public static ImageIcon loadAssets(String path, int width, int height){
         BufferedImage image = null;
         try {
             image = ImageIO.read(new File(path));

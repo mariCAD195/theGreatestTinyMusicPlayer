@@ -8,7 +8,7 @@ public class GUI extends JFrame {
     private MusicPlayer musicPlayer;
     private JLayeredPane layeredPane;
     private JLabel backgroundImage;
-    private JLabel vinyl;
+    private Vinyl vinyl;
     private JPanel buttonPanel;
     private JLabel songTitle;
     private JLabel songArtist;
@@ -23,7 +23,6 @@ public class GUI extends JFrame {
      * JFrame setup
      */
     public GUI() {
-        //JFrame configuration
         super("well hello there");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400,700);
@@ -33,7 +32,6 @@ public class GUI extends JFrame {
 
         dataLoading = new DataLoading();
 
-        //set windowIcon
         ImageIcon icon = dataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
 
@@ -49,8 +47,7 @@ public class GUI extends JFrame {
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0,0,getWidth(),getHeight());
 
-        vinyl = new JLabel(dataLoading.loadAssets("res/assets/defaultVinyl.png",300,300));
-        vinyl.setBounds(0,0,400,350);
+        vinyl = new Vinyl("res/assets/defaultVinyl");
         layeredPane.add(vinyl,Integer.valueOf(1));
 
         songTitle = new JLabel();
@@ -191,8 +188,7 @@ public class GUI extends JFrame {
 
             //adds the vinyl for the currently playing song
             if (playlist.getTonikuvPlaylist().get(name).songsVinyl() != null) {
-                vinyl = new JLabel(dataLoading.loadAssets(playlist.getTonikuvPlaylist().get(name).songsVinyl(), 400, 400));
-                vinyl.setBounds(0, 0, 400, 400);
+                vinyl = new Vinyl(playlist.getTonikuvPlaylist().get(name).songsVinyl());
                 layeredPane.add(vinyl, Integer.valueOf(1));
             }
 
