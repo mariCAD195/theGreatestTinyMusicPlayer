@@ -47,8 +47,8 @@ public class GUI extends JFrame {
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0,0,getWidth(),getHeight());
 
-        vinyl = new Vinyl("res/assets/defaultVinyl");
-        layeredPane.add(vinyl,Integer.valueOf(1));
+        vinyl = new Vinyl("res/assets/defaultVinyl.png");
+        layeredPane.add(vinyl.getVinylRecord(),Integer.valueOf(1));
 
         songTitle = new JLabel();
         songTitle.setBounds(0,410,getWidth()-10,50);
@@ -189,7 +189,7 @@ public class GUI extends JFrame {
             //adds the vinyl for the currently playing song
             if (playlist.getTonikuvPlaylist().get(name).songsVinyl() != null) {
                 vinyl = new Vinyl(playlist.getTonikuvPlaylist().get(name).songsVinyl());
-                layeredPane.add(vinyl, Integer.valueOf(1));
+                layeredPane.add(vinyl.getVinylRecord(), Integer.valueOf(1));
             }
 
             //updates to currently playing song's title, artist and font
