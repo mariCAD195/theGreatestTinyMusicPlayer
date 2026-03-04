@@ -21,6 +21,8 @@ public class GUI extends JFrame {
     private JSlider playbackSlider;
     private JButton playButton;
     private JButton pauseButton;
+    private JButton nextButton;
+    private JButton previousButton;
     private DataLoading dataLoading;
 
     /**
@@ -38,7 +40,7 @@ public class GUI extends JFrame {
         dataLoading = new DataLoading();
 
         //set windowIcon
-        ImageIcon icon = dataLoading.loadAssets("res/assets/art/heartIcon.png",60,60);
+        ImageIcon icon = dataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
 
         musicPlayer = new MusicPlayer();
@@ -53,12 +55,12 @@ public class GUI extends JFrame {
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0,0,getWidth(),getHeight());
 
-        vinyl = new JLabel(dataLoading.loadAssets("res/assets/art/defaultVinyl.png",300,300));
+        vinyl = new JLabel(dataLoading.loadAssets("res/assets/defaultVinyl.png",300,300));
         vinyl.setBounds(0,0,400,350);
         layeredPane.add(vinyl,Integer.valueOf(1));
 
         songTitle = new JLabel();
-        songTitle.setBounds(0,330,getWidth()-10,50);
+        songTitle.setBounds(0,410,getWidth()-10,50);
         songTitle.setText("Song Title");
         songTitle.setFont(dataLoading.loadFont("/fonts/Pixellari.ttf",30));
         songTitle.setForeground(Color.BLACK);
@@ -74,11 +76,11 @@ public class GUI extends JFrame {
         layeredPane.add(songArtist,Integer.valueOf(3));
 
         playbackSlider = new JSlider(JSlider.HORIZONTAL,0,100,0);
-        playbackSlider.setBounds(getWidth()/2 - 300/2, 420, 300, 40);
+        playbackSlider.setBounds(getWidth()/2 - 300/2, 470, 300, 40);
+        playbackSlider.setUI(new Slider(playbackSlider,new Color(199, 199, 130)));
         playbackSlider.setBackground(null);
         playbackSlider.setSnapToTicks(false);
         playbackSlider.setFocusable(false);
-        playbackSlider.setForeground(Color.BLACK);
         layeredPane.add(playbackSlider,Integer.valueOf(4));
 
         add(layeredPane);
@@ -93,10 +95,18 @@ public class GUI extends JFrame {
         buttonPanel = new JPanel();
         buttonPanel.setBackground(null);
         buttonPanel.setOpaque(false);
-        buttonPanel.setBounds(0,470,390,80);
+        buttonPanel.setBounds(0,530,390,80);
+
+        previousButton = new JButton(dataLoading.loadAssets("res/assets/previousButton.png",50,50));
+        previousButton.setOpaque(true);
+        previousButton.setBackground(null);
+        previousButton.setFocusPainted(false);
+        previousButton.setBorderPainted(false);
+        previousButton.setContentAreaFilled(false);
+        buttonPanel.add(previousButton);
 
         //play button - loads the playlist and plays songs, updates gui to song specific assets
-        playButton = new JButton(dataLoading.loadAssets("res/assets/art/defaultPlayButton.png",50,50));
+        playButton = new JButton(dataLoading.loadAssets("res/assets/PlayButton.png",50,50));
         playButton.setOpaque(false);
         playButton.setBackground(null);
         playButton.setFocusPainted(false);
@@ -119,7 +129,7 @@ public class GUI extends JFrame {
         });
 
         //pause button - stops the music
-        pauseButton = new JButton(dataLoading.loadAssets("res/assets/art/defaultPauseButton.png",50,50));
+        pauseButton = new JButton(dataLoading.loadAssets("res/assets/pauseButton.png",50,50));
         pauseButton.setVisible(false);
         pauseButton.setOpaque(false);
         pauseButton.setBackground(null);
@@ -133,6 +143,15 @@ public class GUI extends JFrame {
                 PLAYonPauseOff();
             }
         });
+
+        nextButton = new JButton(dataLoading.loadAssets("res/assets/nextButton.png",50,50));
+        nextButton.setVisible(true);
+        nextButton.setOpaque(false);
+        nextButton.setBackground(null);
+        nextButton.setFocusPainted(false);
+        nextButton.setBorderPainted(false);
+        nextButton.setContentAreaFilled(false);
+        buttonPanel.add(nextButton);
 
         add(buttonPanel);
     }
@@ -178,8 +197,8 @@ public class GUI extends JFrame {
 
             //adds the vinyl for the currently playing song
             if (playlist.getTonikuvPlaylist().get(name).songsVinyl() != null) {
-                vinyl = new JLabel(dataLoading.loadAssets(playlist.getTonikuvPlaylist().get(name).songsVinyl(), 300, 300));
-                vinyl.setBounds(0, 0, 400, 350);
+                vinyl = new JLabel(dataLoading.loadAssets(playlist.getTonikuvPlaylist().get(name).songsVinyl(), 400, 400));
+                vinyl.setBounds(0, 0, 400, 400);
                 layeredPane.add(vinyl, Integer.valueOf(1));
             }
 
@@ -194,15 +213,18 @@ public class GUI extends JFrame {
                 songArtist.setFont(dataLoading.loadFont(playlist.getTonikuvPlaylist().get(name).songsFont(), 20));
                 songArtist.setForeground(new Color(0, 0, 0));
                 layeredPane.add(songArtist, Integer.valueOf(3));
+
             }
 
             playbackSlider = new JSlider(JSlider.HORIZONTAL,0,100,0);
-            playbackSlider.setBounds(getWidth()/2 - 300/2, 420, 300, 40);
+            playbackSlider.setBounds(getWidth()/2 - 300/2, 470, 300, 40);
+            playbackSlider.setUI(new Slider(playbackSlider,playlist.getTonikuvPlaylist().get(name).getProgressBarColor()));
+            playbackSlider.setOpaque(false);
             playbackSlider.setBackground(null);
             playbackSlider.setSnapToTicks(false);
             playbackSlider.setFocusable(false);
             playbackSlider.setForeground(Color.BLACK);
-            layeredPane.add(playbackSlider);
+            layeredPane.add(playbackSlider, Integer.valueOf(4));
 
             add(layeredPane);
         }else{

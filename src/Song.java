@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,13 +12,15 @@ public class Song {
     private String backgroundFilePath;
     private String vinylFilePath;
     private String fontFilePath;
+    private Color progressBarColor;
 
-    public Song(String songTitle, String songArtist, String songLength, String filePath) {
+    public Song(String songTitle, String songArtist, String songLength, String filePath,Color color) {
         this.songTitle = songTitle;
         this.songArtist = songArtist;
         this.songLength = songLength;
         this.filePath = filePath;
         this.songsAssets = new HashMap<>();
+        this.progressBarColor = color;
     }
 
     public void setAssetPaths(String backgroundFilePath, String vinylFilePath, String fontFilePath) {
@@ -57,5 +60,21 @@ public class Song {
 
     public HashMap<String, String> getSongsAssets() {
         return songsAssets;
+    }
+
+    public String getBackgroundFilePath() {
+        return backgroundFilePath;
+    }
+
+    public String getVinylFilePath() {
+        return vinylFilePath;
+    }
+
+    public String getFontFilePath() {
+        return fontFilePath;
+    }
+
+    public Color getProgressBarColor() {
+        return progressBarColor;
     }
 }
