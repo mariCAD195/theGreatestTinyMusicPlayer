@@ -11,7 +11,7 @@ public class MusicPlayer {
     private boolean isPaused;
     private long pausePosition;
     private boolean isPlaying;
-    Playlist playlist;
+    private Playlist playlist;
     private int currentSongIndex;
     private DataLoading dataLoading;
 
