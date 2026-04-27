@@ -23,8 +23,6 @@ public class PlayerGUI extends JPanel{
         setOpaque(false);
 
         musicPlayer = new MusicPlayer();
-        buttons = new Buttons(musicPlayer, vinyl);
-        buttons.addButtons();
     }
 
 
@@ -34,31 +32,47 @@ public class PlayerGUI extends JPanel{
      * @param playlist playlist with our songs
      * @param name     keyword of the song specific assets
      */
-    public void tempoaryGUI() {
+    public void temporaryGUI() {
 
         vinyl = new Vinyl("/assets/deathBedVinyl.png");
+        Dimension vinylDimension = new Dimension(400,400);
+        vinyl.setSize(vinylDimension);
+        vinyl.setMaximumSize(vinylDimension);
+        vinyl.setMinimumSize(vinylDimension);
+        vinyl.setPreferredSize(vinylDimension);
+        vinyl.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(vinyl);
 
         songTitle.setText("Death Bed");
         songTitle.setFont(dataLoading.loadFont("/fonts/Daydream DEMO.otf", 30));
         songTitle.setForeground(new Color(0, 0, 0));
+        songTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(songTitle);
 
         songArtist.setText("POWFU");
         songArtist.setFont(dataLoading.loadFont("/fonts/Daydream DEMO.otf", 20));
         songArtist.setForeground(new Color(0, 0, 0));
+        songArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(songArtist);
 
 
         playbackSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        playbackSlider.setSize(300,40);
+        Dimension sliderDimension = new Dimension(300,40);
+        playbackSlider.setMaximumSize(sliderDimension);
+        playbackSlider.setMaximumSize(sliderDimension);
+        playbackSlider.setPreferredSize(sliderDimension);
         playbackSlider.setUI(new SliderUI(playbackSlider, new Color(110, 81, 200)));
         playbackSlider.setOpaque(false);
         playbackSlider.setBackground(null);
         playbackSlider.setSnapToTicks(false);
         playbackSlider.setFocusable(false);
         playbackSlider.setForeground(Color.BLACK);
+        playbackSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(playbackSlider);
 
+        buttons = new Buttons(musicPlayer, vinyl);
+        buttons.addButtons();
         add(buttons);
     }
 

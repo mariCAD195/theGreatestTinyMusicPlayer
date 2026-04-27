@@ -6,13 +6,15 @@ public class MainWindow extends JFrame {
     private DataLoading dataLoading;
     private PlayerGUI playerGUI;
     private Background background;
+    private CardLayout cardLayout;
 
     public MainWindow(){
         super("well hello there");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400,700);
         setLocationRelativeTo(null);
-        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        cardLayout = new CardLayout();
+        setLayout(cardLayout);
         setResizable(false);
 
         dataLoading = new DataLoading();
@@ -31,7 +33,7 @@ public class MainWindow extends JFrame {
     }
 
     public void addMusicPlayer(){
-        playerGUI.tempoaryGUI();
+        playerGUI.temporaryGUI();
         add(playerGUI);
     }
 }
