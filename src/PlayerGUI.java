@@ -4,6 +4,7 @@ import java.awt.*;
 public class PlayerGUI extends JPanel{
 
     private MusicPlayer musicPlayer;
+    private JLayeredPane layeredPane;
     private JLabel backgroundImage;
     private Vinyl vinyl;
     private Buttons buttons;
@@ -18,13 +19,11 @@ public class PlayerGUI extends JPanel{
     public PlayerGUI() {
         super();
         dataLoading = new DataLoading();
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
         musicPlayer = new MusicPlayer();
         buttons = new Buttons(musicPlayer, vinyl);
         buttons.addButtons();
-        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-
-        tempoaryGUI();
     }
 
 
@@ -35,15 +34,10 @@ public class PlayerGUI extends JPanel{
      * @param name     keyword of the song specific assets
      */
     public void tempoaryGUI() {
-        playbackSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
-        playbackSlider.setBounds(getWidth() / 2 - 300 / 2, 470, 300, 40);
-        playbackSlider.setUI(new SliderUI(playbackSlider, new Color(110, 81, 200)));
-        playbackSlider.setOpaque(false);
-        playbackSlider.setBackground(null);
-        playbackSlider.setSnapToTicks(false);
-        playbackSlider.setFocusable(false);
-        playbackSlider.setForeground(Color.BLACK);
-        add(playbackSlider);
+
+        vinyl = new Vinyl("/assets/deathBedVinyl.png");
+        vinyl.setBounds(0, 0, 400, 400);
+        add(vinyl);
 
         songTitle.setText("Death Bed");
         songTitle.setFont(dataLoading.loadFont("/fonts/Daydream DEMO.otf", 30));
@@ -55,6 +49,16 @@ public class PlayerGUI extends JPanel{
         songArtist.setForeground(new Color(0, 0, 0));
         add(songArtist);
 
+
+        playbackSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        playbackSlider.setBounds(getWidth() / 2 - 300 / 2, 470, 300, 40);
+        playbackSlider.setUI(new SliderUI(playbackSlider, new Color(110, 81, 200)));
+        playbackSlider.setOpaque(false);
+        playbackSlider.setBackground(null);
+        playbackSlider.setSnapToTicks(false);
+        playbackSlider.setFocusable(false);
+        playbackSlider.setForeground(Color.BLACK);
+        add(playbackSlider);
     }
 
     public MusicPlayer getMusicPlayer() {
