@@ -20,6 +20,7 @@ public class PlayerGUI extends JPanel{
         super();
         dataLoading = new DataLoading();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        setOpaque(false);
 
         musicPlayer = new MusicPlayer();
         buttons = new Buttons(musicPlayer, vinyl);
@@ -36,7 +37,6 @@ public class PlayerGUI extends JPanel{
     public void tempoaryGUI() {
 
         vinyl = new Vinyl("/assets/deathBedVinyl.png");
-        vinyl.setBounds(0, 0, 400, 400);
         add(vinyl);
 
         songTitle.setText("Death Bed");
@@ -51,7 +51,6 @@ public class PlayerGUI extends JPanel{
 
 
         playbackSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
-        playbackSlider.setBounds(getWidth() / 2 - 300 / 2, 470, 300, 40);
         playbackSlider.setUI(new SliderUI(playbackSlider, new Color(110, 81, 200)));
         playbackSlider.setOpaque(false);
         playbackSlider.setBackground(null);
@@ -59,6 +58,8 @@ public class PlayerGUI extends JPanel{
         playbackSlider.setFocusable(false);
         playbackSlider.setForeground(Color.BLACK);
         add(playbackSlider);
+
+        add(buttons);
     }
 
     public MusicPlayer getMusicPlayer() {

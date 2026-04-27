@@ -2,9 +2,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Buttons {
+public class Buttons extends JPanel{
 
-    private JPanel buttonPanel;
     private JButton previousButton;
     private JButton playButton;
     private JButton pauseButton;
@@ -14,13 +13,12 @@ public class Buttons {
     private Vinyl vinyl;
 
     public Buttons(MusicPlayer musicPlayerImported, Vinyl vinylImported) {
+        super();
         dataLoading = new DataLoading();
         musicPlayer = musicPlayerImported;
         vinyl = vinylImported;
-        buttonPanel = new JPanel();
-        buttonPanel.setBackground(null);
-        buttonPanel.setOpaque(false);
-        buttonPanel.setBounds(0, 530, 390, 80);
+        setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
+        setOpaque(false);
     }
 
     public void addButtons() {
@@ -30,7 +28,7 @@ public class Buttons {
         previousButton.setFocusPainted(false);
         previousButton.setBorderPainted(false);
         previousButton.setContentAreaFilled(false);
-        buttonPanel.add(previousButton);
+        add(previousButton);
 
         playButton = new JButton(dataLoading.loadAssets("res/assets/PlayButton.png", 50, 50));
         playButton.setOpaque(false);
@@ -38,7 +36,7 @@ public class Buttons {
         playButton.setFocusPainted(false);
         playButton.setBorderPainted(false);
         playButton.setContentAreaFilled(false);
-        buttonPanel.add(playButton);
+        add(playButton);
 
         pauseButton = new JButton(dataLoading.loadAssets("res/assets/pauseButton.png", 50, 50));
         pauseButton.setVisible(false);
@@ -47,7 +45,7 @@ public class Buttons {
         pauseButton.setFocusPainted(false);
         pauseButton.setBorderPainted(false);
         pauseButton.setContentAreaFilled(false);
-        buttonPanel.add(pauseButton);
+        add(pauseButton);
 
         nextButton = new JButton(dataLoading.loadAssets("res/assets/nextButton.png", 50, 50));
         nextButton.setVisible(true);
@@ -56,7 +54,7 @@ public class Buttons {
         nextButton.setFocusPainted(false);
         nextButton.setBorderPainted(false);
         nextButton.setContentAreaFilled(false);
-        buttonPanel.add(nextButton);
+        add(nextButton);
 
         makeThemDoStuff();
     }
