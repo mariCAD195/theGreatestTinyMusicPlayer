@@ -12,6 +12,7 @@ public class PlayerGUI extends JPanel{
     private JLabel songArtist = new JLabel();
     private JSlider playbackSlider;
     private DataLoading dataLoading;
+    private MenuPanel menuPanel;
 
     /**
      * JFrame setup
@@ -74,6 +75,12 @@ public class PlayerGUI extends JPanel{
         buttons = new Buttons(musicPlayer, vinyl);
         buttons.addButtons();
         add(buttons);
+
+        menuPanel = new MenuPanel();
+        menuPanel.addButtons();
+        menuPanel.setAlignmentX(CENTER_ALIGNMENT);
+        add(menuPanel);
+
     }
 
     public MusicPlayer getMusicPlayer() {
