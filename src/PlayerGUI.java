@@ -45,6 +45,11 @@ public class PlayerGUI extends JPanel{
         add(vinyl);
 
         songTitle.setText("Death Bed");
+        Dimension songTitleDimension = new Dimension(280,35);
+        songTitle.setSize(songTitleDimension);
+        songTitle.setMaximumSize(songTitleDimension);
+        songTitle.setMinimumSize(songTitleDimension);
+        songTitle.setPreferredSize(songTitleDimension);
         songTitle.setFont(dataLoading.loadFont("/fonts/Daydream DEMO.otf", 30));
         songTitle.setForeground(new Color(0, 0, 0));
         songTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -76,9 +81,16 @@ public class PlayerGUI extends JPanel{
         buttons.addButtons();
         add(buttons);
 
+        add(Box.createRigidArea(new Dimension(0, 15)));
+
         menuPanel = new MenuPanel();
         menuPanel.addButtons();
+        Dimension menuDimension = new Dimension(270,60);
         menuPanel.setAlignmentX(CENTER_ALIGNMENT);
+        menuPanel.setSize(menuDimension);
+        menuPanel.setMaximumSize(menuDimension);
+        menuPanel.setMinimumSize(menuDimension);
+        menuPanel.setPreferredSize(menuDimension);
         add(menuPanel);
 
     }
