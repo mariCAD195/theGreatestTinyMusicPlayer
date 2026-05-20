@@ -24,7 +24,7 @@ public class PlayerGUI extends Background{
         musicPlayer = new MusicPlayer();
     }
 
-    public void temporaryGUI() {
+    public void temporaryGUI(CardLayout cardLayout, JPanel cards) {
 
         vinyl = new Vinyl("/assets/deathBedVinyl.png");
         Dimension vinylDimension = new Dimension(400,400);
@@ -75,7 +75,7 @@ public class PlayerGUI extends Background{
         add(Box.createRigidArea(new Dimension(0, 15)));
 
         menuPanel = new MenuPanel();
-        menuPanel.addButtons();
+        menuPanel.addButtons(cardLayout, cards);
         Dimension menuDimension = new Dimension(270,60);
         menuPanel.setAlignmentX(CENTER_ALIGNMENT);
         menuPanel.setSize(menuDimension);

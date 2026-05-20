@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Library extends JPanel {
-    public Library(CardLayout cardLayout, JPanel cards) {
+public class Customization extends JPanel {
+    public Customization(CardLayout cardLayout, JPanel cards) {
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(true);
 
-        setBackground(new Color(27, 94, 239));
+        setBackground(new Color(154, 239, 27));
 
         setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         load(cardLayout, cards);

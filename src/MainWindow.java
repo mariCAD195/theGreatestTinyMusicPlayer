@@ -7,6 +7,8 @@ public class MainWindow extends JFrame {
     private Background background;
     private CardLayout cardLayout;
     private Library library;
+    private Queue queue;
+    private Customization customization;
     private JPanel cards;
 
     public MainWindow(){
@@ -26,8 +28,14 @@ public class MainWindow extends JFrame {
             throw new RuntimeException(e);
         }
 
-        library = new Library();
+        library = new Library(cardLayout,cards);
         cards.add(library,"library");
+
+        queue = new Queue(cardLayout,cards);
+        cards.add(queue,"queue");
+
+        customization = new Customization(cardLayout,cards);
+        cards.add(customization,"customization");
 
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
@@ -35,12 +43,12 @@ public class MainWindow extends JFrame {
         addMusicPlayer();
 
         cardLayout.show(cards,"player");
-        cardLayout.show(cards,"library");
+
         add(cards);
     }
 
     public void addMusicPlayer(){
-        playerGUI.temporaryGUI();
+        playerGUI.temporaryGUI(cardLayout, cards);
         cards.add(playerGUI,"player");
     }
 }

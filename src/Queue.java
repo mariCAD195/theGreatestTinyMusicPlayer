@@ -1,13 +1,14 @@
+import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
 
-public class Library extends JPanel {
-    public Library(CardLayout cardLayout, JPanel cards) {
+public class Queue extends JPanel {
+    public Queue(CardLayout cardLayout, JPanel cards) {
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(true);
 
-        setBackground(new Color(27, 94, 239));
+        setBackground(new Color(239, 27, 197));
 
         setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         load(cardLayout, cards);

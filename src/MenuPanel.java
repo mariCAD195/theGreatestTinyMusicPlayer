@@ -29,7 +29,7 @@ public class MenuPanel extends JPanel {
         }
     }
 
-    public void addButtons(){
+    public void addButtons(CardLayout cardLayout, JPanel cards){
         add(Box.createRigidArea(new Dimension(15, 0)));
 
         allPlaylists = new JButton(dataLoading.loadAssets("res/assets/playlists.png", 40, 40));
@@ -60,18 +60,18 @@ public class MenuPanel extends JPanel {
         customization.setContentAreaFilled(false);
         add(customization);
 
-        makeThemDoStuff();
+        makeThemDoStuff(cardLayout, cards);
     }
 
-    public void makeThemDoStuff(){
+    public void makeThemDoStuff(CardLayout cardLayout, JPanel cards){
         allPlaylists.addActionListener(e -> {
-
+            cardLayout.show(cards,"library");
         });
         queue.addActionListener(e -> {
-
+            cardLayout.show(cards,"queue");
         });
         customization.addActionListener(e -> {
-
+            cardLayout.show(cards,"customization");
         });
     }
 }
