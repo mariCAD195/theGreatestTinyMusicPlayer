@@ -3,37 +3,44 @@ import java.awt.*;
 
 public class MainWindow extends JFrame {
 
-    private DataLoading dataLoading;
     private PlayerGUI playerGUI;
     private Background background;
     private CardLayout cardLayout;
+    private Library library;
+    private JPanel cards;
 
     public MainWindow(){
         super("well hello there");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400,700);
         setLocationRelativeTo(null);
-        cardLayout = new CardLayout();
-        setLayout(cardLayout);
         setResizable(false);
 
-        dataLoading = new DataLoading();
-        playerGUI = new PlayerGUI();
+        cardLayout = new CardLayout();
+        cards = new JPanel(cardLayout);
+        cards.setOpaque(false);
+
         try {
-            background = new Background("/assets/deathBedBackground.png");
-            this.setContentPane(background);
+            playerGUI = new PlayerGUI();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        ImageIcon icon = dataLoading.loadAssets("res/assets/heartIcon.png",60,60);
+        library = new Library();
+        cards.add(library,"library");
+
+        ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
 
         addMusicPlayer();
+
+        cardLayout.show(cards,"player");
+        cardLayout.show(cards,"library");
+        add(cards);
     }
 
     public void addMusicPlayer(){
         playerGUI.temporaryGUI();
-        add(playerGUI);
+        cards.add(playerGUI,"player");
     }
 }

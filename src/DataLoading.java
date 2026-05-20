@@ -44,10 +44,10 @@ public class DataLoading {
      * @param size font size we want to use
      * @return new custom font
      */
-    public Font loadFont(String path, float size){
+    public static Font loadFont(String path, float size){
         Font font = null;
         try {
-            InputStream inputStream = getClass().getResourceAsStream(path);
+            InputStream inputStream = DataLoading.class.getResourceAsStream(path);
             BufferedInputStream bis = new BufferedInputStream(inputStream);
             font = Font.createFont(Font.TRUETYPE_FONT,bis).deriveFont(size);
         } catch (FontFormatException e) {

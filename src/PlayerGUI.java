@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class PlayerGUI extends JPanel{
+public class PlayerGUI extends Background{
 
     private MusicPlayer musicPlayer;
     private JLayeredPane layeredPane;
@@ -11,28 +11,19 @@ public class PlayerGUI extends JPanel{
     private JLabel songTitle = new JLabel();
     private JLabel songArtist = new JLabel();
     private JSlider playbackSlider;
-    private DataLoading dataLoading;
     private MenuPanel menuPanel;
 
     /**
      * JFrame setup
      */
-    public PlayerGUI() {
-        super();
-        dataLoading = new DataLoading();
+    public PlayerGUI() throws Exception {
+        super("/assets/deathBedBackground.png");
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(false);
 
         musicPlayer = new MusicPlayer();
     }
 
-
-    /**
-     * updates GUI to assets specific to a song that is currently playing
-     *
-     * @param playlist playlist with our songs
-     * @param name     keyword of the song specific assets
-     */
     public void temporaryGUI() {
 
         vinyl = new Vinyl("/assets/deathBedVinyl.png");
@@ -50,13 +41,13 @@ public class PlayerGUI extends JPanel{
         songTitle.setMaximumSize(songTitleDimension);
         songTitle.setMinimumSize(songTitleDimension);
         songTitle.setPreferredSize(songTitleDimension);
-        songTitle.setFont(dataLoading.loadFont("/fonts/Daydream DEMO.otf", 30));
+        songTitle.setFont(DataLoading.loadFont("/fonts/Daydream DEMO.otf", 30));
         songTitle.setForeground(new Color(0, 0, 0));
         songTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(songTitle);
 
         songArtist.setText("POWFU");
-        songArtist.setFont(dataLoading.loadFont("/fonts/Daydream DEMO.otf", 20));
+        songArtist.setFont(DataLoading.loadFont("/fonts/Daydream DEMO.otf", 20));
         songArtist.setForeground(new Color(0, 0, 0));
         songArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(songArtist);
