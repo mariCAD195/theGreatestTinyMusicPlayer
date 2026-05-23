@@ -1,5 +1,6 @@
 import javax.smartcardio.Card;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
 
@@ -36,7 +37,13 @@ public class Queue extends JPanel {
 
     public void makeItDoSomething(CardLayout cardLayout, JPanel cards){
         fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(""));
+        String downloadsPath =
+                System.getProperty("user.home") + File.separator + "Downloads";
+        fileChooser.setCurrentDirectory(new File(downloadsPath));
+        fileChooser.setFileFilter(
+                new FileNameExtensionFilter("Music Files", "mp3", "wav")
+        );
+
         audioPlayer = new AudioPlayer();
 
         addSong.addActionListener(e -> {
