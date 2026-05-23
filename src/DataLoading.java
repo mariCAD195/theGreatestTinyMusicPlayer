@@ -58,8 +58,8 @@ public class DataLoading {
         return font;
     }
 
-    public AudioInputStream loadSong(String path){
-        InputStream inputStream = getClass().getResourceAsStream(path);
+    public static AudioInputStream loadSong(String path){
+        InputStream inputStream = DataLoading.class.getResourceAsStream(path);
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
         AudioInputStream audioInputStream;
         try {

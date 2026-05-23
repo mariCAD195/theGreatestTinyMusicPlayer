@@ -1,5 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        new MainWindow().setVisible(true);
+        LoadingScreen loadingScreen = new LoadingScreen();
+        loadingScreen.setVisible(true);
+        loadingScreen.loadingBar();
     }
 }

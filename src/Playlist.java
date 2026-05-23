@@ -3,18 +3,18 @@ import java.util.HashMap;
 
 public class Playlist {
 
-    private HashMap<String,Song> tonikuvPlaylist;
+    private HashMap<String,Song> playlist;
 
     public Playlist() {
-        this.tonikuvPlaylist = new HashMap<>();
+        this.playlist = new HashMap<>();
     }
 
-    public HashMap<String, Song> getTonikuvPlaylist() {
-        return tonikuvPlaylist;
+    public HashMap<String, Song> getPlaylist() {
+        return playlist;
     }
 
     public void addSong(String name, Song song) {
-        this.tonikuvPlaylist.put(name,song);
+        this.playlist.put(name,song);
     }
 
     public String getSongByNumber(int number) {

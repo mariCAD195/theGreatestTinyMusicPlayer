@@ -9,11 +9,11 @@ public class Library extends JPanel {
 
         setBackground(new Color(27, 94, 239));
 
-        setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         load(cardLayout, cards);
     }
 
     public void load(CardLayout cardLayout, JPanel cards){
+
         JButton back = new JButton("Back");
         back.addActionListener(e -> {
             cardLayout.show(cards,"player");
