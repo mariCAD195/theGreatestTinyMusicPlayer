@@ -18,11 +18,11 @@ public class Playlist {
     }
 
     public String getSongByNumber(int number) {
-        switch(number){
-            case 0: return "Death Bed";
-            case 1: return "Californication";
+        ArrayList<Song> songs = new ArrayList<>();
+        for(Song s : this.playlist.values()) {
+            songs.add(s);
         }
-        return null;
+        return songs.get(number).getSongTitle();
     }
 
 }

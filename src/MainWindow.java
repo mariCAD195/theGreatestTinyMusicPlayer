@@ -42,7 +42,7 @@ public class MainWindow extends JFrame {
 
         addMusicPlayer();
 
-        cardLayout.show(cards,"player");
+        cardLayout.show(cards,"library");
 
         add(cards);
     }

@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Library extends JPanel {
+
+    private JButton newPlaylist;
+
     public Library(CardLayout cardLayout, JPanel cards) {
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -13,6 +16,8 @@ public class Library extends JPanel {
     }
 
     public void load(CardLayout cardLayout, JPanel cards){
+        newPlaylist = new JButton("New Playlist");
+        add(newPlaylist);
 
         JButton back = new JButton("Back");
         back.addActionListener(e -> {
@@ -20,5 +25,12 @@ public class Library extends JPanel {
         });
 
         add(back);
+        makeItDoSomething(cardLayout, cards);
+    }
+
+    public void makeItDoSomething(CardLayout cardLayout, JPanel cards){
+        newPlaylist.addActionListener(e -> {
+            cardLayout.show(cards,"queue");
+        });
     }
 }
