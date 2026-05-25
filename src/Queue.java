@@ -3,6 +3,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public class Queue extends JPanel {
 
@@ -10,6 +11,10 @@ public class Queue extends JPanel {
     private JFileChooser fileChooser;
     private Song song;
     private AudioPlayer audioPlayer;
+    private JButton playButton;
+    private ArrayList<Song> songList;
+    private Dialog dialog;
+    private boolean readyToPlay;
 
     public Queue(CardLayout cardLayout, JPanel cards) {
         super();
@@ -20,6 +25,7 @@ public class Queue extends JPanel {
 
         setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         load(cardLayout, cards);
+        songList = new ArrayList<>();
     }
 
     public void load(CardLayout cardLayout, JPanel cards){
@@ -32,10 +38,11 @@ public class Queue extends JPanel {
         });
 
         add(back);
-        makeItDoSomething(cardLayout, cards);
+        makeItDoSomething();
+        play(cardLayout, cards);
     }
 
-    public void makeItDoSomething(CardLayout cardLayout, JPanel cards){
+    public void makeItDoSomething(){
         fileChooser = new JFileChooser();
         String downloadsPath =
                 System.getProperty("user.home") + File.separator + "Downloads";
@@ -52,10 +59,38 @@ public class Queue extends JPanel {
 
             if (selected != null) {
                 song = new Song(selected.getPath(), new Color(0,0,0));
-                audioPlayer.loadSong(song);
-                cardLayout.show(cards,"player");
+                songList.add(song);
             }
         });
+    }
 
+    public Dialog newDialog(String text, int width, int height) {
+        dialog = new JDialog();
+        dialog.setLayout(new BorderLayout());
+        JLabel label = new JLabel(text);
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dialog.add(label, BorderLayout.CENTER);
+        dialog.setSize(width, height);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+        return dialog;
+    }
+
+    public void play(CardLayout cardLayout, JPanel cards) {
+        playButton = new JButton("Play");
+        add(playButton);
+        playButton.addActionListener(e -> {
+            if (!songList.isEmpty()) {
+                audioPlayer.loadSong(songList.getFirst());
+                readyToPlay = true;
+                cardLayout.show(cards,"player");
+            }else{
+                newDialog("no songs",300,150);
+            }
+        });
+    }
+
+    public boolean isReadyToPlay() {
+        return readyToPlay;
     }
 }

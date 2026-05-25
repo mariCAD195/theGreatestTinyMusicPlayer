@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class PlayerGUI extends Background{
 
-    private MusicPlayer musicPlayer;
+    private AudioPlayer audioPlayer;
     private JLayeredPane layeredPane;
     private JLabel backgroundImage;
     private Vinyl vinyl;
@@ -21,7 +21,7 @@ public class PlayerGUI extends Background{
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(false);
 
-        musicPlayer = new MusicPlayer();
+        audioPlayer = new AudioPlayer();
     }
 
     public void temporaryGUI(CardLayout cardLayout, JPanel cards) {
@@ -33,9 +33,11 @@ public class PlayerGUI extends Background{
         vinyl.setMinimumSize(vinylDimension);
         vinyl.setPreferredSize(vinylDimension);
         vinyl.setAlignmentX(Component.CENTER_ALIGNMENT);
+        vinyl.startSpinning();
         add(vinyl);
 
-        songTitle.setText("Death Bed");
+        updateSong(audioPlayer.getCurrentSong());
+
         Dimension songTitleDimension = new Dimension(280,35);
         songTitle.setSize(songTitleDimension);
         songTitle.setMaximumSize(songTitleDimension);
@@ -46,7 +48,6 @@ public class PlayerGUI extends Background{
         songTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(songTitle);
 
-        songArtist.setText("POWFU");
         songArtist.setFont(DataLoading.loadFont("/fonts/Daydream DEMO.otf", 20));
         songArtist.setForeground(new Color(0, 0, 0));
         songArtist.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -68,7 +69,7 @@ public class PlayerGUI extends Background{
         playbackSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(playbackSlider);
 
-        buttons = new Buttons(musicPlayer, vinyl);
+        buttons = new Buttons(vinyl);
         buttons.addButtons();
         add(buttons);
 
@@ -86,8 +87,10 @@ public class PlayerGUI extends Background{
 
     }
 
-    public MusicPlayer getMusicPlayer() {
-        return musicPlayer;
+    public void updateSong(Song song) {
+        songTitle.setText(song.getSongTitle());
+        songArtist.setText(song.getSongArtist());
     }
+
 }
 

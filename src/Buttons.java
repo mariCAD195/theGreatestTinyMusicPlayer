@@ -9,14 +9,14 @@ public class Buttons extends JPanel{
     private JButton pauseButton;
     private JButton nextButton;
     private DataLoading dataLoading;
-    private MusicPlayer musicPlayer;
+    private AudioPlayer audioPlayer;
     private Vinyl vinyl;
 
-    public Buttons(MusicPlayer musicPlayerImported, Vinyl vinylImported) {
+    public Buttons(Vinyl vinyl) {
         super();
         dataLoading = new DataLoading();
-        musicPlayer = musicPlayerImported;
-        vinyl = vinylImported;
+        this.vinyl = vinyl;
+        audioPlayer = new AudioPlayer();
         setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         setOpaque(false);
     }
@@ -31,6 +31,7 @@ public class Buttons extends JPanel{
         add(previousButton);
 
         playButton = new JButton(dataLoading.loadAssets("res/assets/PlayButton.png", 50, 50));
+        playButton.setVisible(false);
         playButton.setOpaque(false);
         playButton.setBackground(null);
         playButton.setFocusPainted(false);
@@ -39,7 +40,6 @@ public class Buttons extends JPanel{
         add(playButton);
 
         pauseButton = new JButton(dataLoading.loadAssets("res/assets/pauseButton.png", 50, 50));
-        pauseButton.setVisible(false);
         pauseButton.setOpaque(false);
         pauseButton.setBackground(null);
         pauseButton.setFocusPainted(false);
@@ -62,25 +62,18 @@ public class Buttons extends JPanel{
     public void makeThemDoStuff() {
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                musicPlayer.pause();
+                audioPlayer.pauseSong();
                 vinyl.stopSpinning();
                 PLAYonPauseOff();
             }
         });
+
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!musicPlayer.isPlaying()) {
-                    musicPlayer.loadPlaylist();
-                    musicPlayer.loadSong(musicPlayer.getPlaylist(), musicPlayer.getPlaylist().getSongByNumber(musicPlayer.getCurrentSongIndex()));
-                    musicPlayer.playSong();
-                    PAUSEonPlayOff();
-                    vinyl.startSpinning();
-                } else {
-                    musicPlayer.resume();
+                    audioPlayer.resumeSong();
                     PAUSEonPlayOff();
                     vinyl.startSpinning();
                 }
-            }
         });
 
     }

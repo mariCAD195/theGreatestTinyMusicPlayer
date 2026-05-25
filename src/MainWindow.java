@@ -22,12 +22,6 @@ public class MainWindow extends JFrame {
         cards = new JPanel(cardLayout);
         cards.setOpaque(false);
 
-        try {
-            playerGUI = new PlayerGUI();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
         library = new Library(cardLayout,cards);
         cards.add(library,"library");
 
@@ -40,14 +34,19 @@ public class MainWindow extends JFrame {
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
 
-        addMusicPlayer();
-
         cardLayout.show(cards,"library");
+
+        addMusicPlayer();
 
         add(cards);
     }
 
     public void addMusicPlayer(){
+        try {
+            playerGUI = new PlayerGUI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         playerGUI.temporaryGUI(cardLayout, cards);
         cards.add(playerGUI,"player");
     }

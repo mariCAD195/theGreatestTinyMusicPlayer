@@ -1,3 +1,6 @@
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.CannotReadException;
@@ -24,6 +27,8 @@ public class Song {
     private String vinylFilePath;
     private String fontFilePath;
     private Color progressBarColor;
+    private Mp3File mp3File;
+    private double frameRate;
 
     public Song(String filePath,Color color) {
         this.filePath = filePath;
@@ -51,6 +56,18 @@ public class Song {
 
         this.songsAssets = new HashMap<>();
         this.progressBarColor = color;
+    }
+    public void mathPleaseKillMe(String filePath){
+        try {
+            mp3File = new Mp3File(filePath);
+            frameRate = (double) mp3File.getFrameCount() / mp3File.getLengthInMilliseconds();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidDataException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedTagException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setAssetPaths(String backgroundFilePath, String vinylFilePath, String fontFilePath) {
@@ -88,23 +105,11 @@ public class Song {
         return filePath;
     }
 
-    public HashMap<String, String> getSongsAssets() {
-        return songsAssets;
+    public Mp3File getMp3File() {
+        return mp3File;
     }
 
-    public String getBackgroundFilePath() {
-        return backgroundFilePath;
-    }
-
-    public String getVinylFilePath() {
-        return vinylFilePath;
-    }
-
-    public String getFontFilePath() {
-        return fontFilePath;
-    }
-
-    public Color getProgressBarColor() {
-        return progressBarColor;
+    public double getFrameRate() {
+        return frameRate;
     }
 }
