@@ -15,17 +15,20 @@ public class Queue extends JPanel {
     private ArrayList<Song> songList;
     private Dialog dialog;
     private boolean readyToPlay;
+    private PlayerGUI playerGUI;
 
-    public Queue(CardLayout cardLayout, JPanel cards) {
+    public Queue(CardLayout cardLayout, JPanel cards, PlayerGUI playerGUI) {
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(true);
 
         setBackground(new Color(239, 27, 197));
 
+        this.playerGUI = playerGUI;
         setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         load(cardLayout, cards);
         songList = new ArrayList<>();
+
     }
 
     public void load(CardLayout cardLayout, JPanel cards){
@@ -83,11 +86,13 @@ public class Queue extends JPanel {
             if (!songList.isEmpty()) {
                 audioPlayer.loadSong(songList.getFirst());
                 readyToPlay = true;
+                playerGUI.temporaryGUI(cardLayout, cards,audioPlayer);
                 cardLayout.show(cards,"player");
             }else{
                 newDialog("no songs",300,150);
             }
         });
+
     }
 
     public boolean isReadyToPlay() {

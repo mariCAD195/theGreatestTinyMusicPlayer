@@ -71,8 +71,8 @@ public class Buttons extends JPanel{
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                     audioPlayer.resumeSong();
-                    PAUSEonPlayOff();
                     vinyl.startSpinning();
+                    PAUSEonPlayOff();
                 }
         });
 

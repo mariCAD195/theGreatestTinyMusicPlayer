@@ -25,7 +25,14 @@ public class MainWindow extends JFrame {
         library = new Library(cardLayout,cards);
         cards.add(library,"library");
 
-        queue = new Queue(cardLayout,cards);
+        try {
+            playerGUI = new PlayerGUI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        cards.add(playerGUI,"player");
+
+        queue = new Queue(cardLayout,cards,playerGUI);
         cards.add(queue,"queue");
 
         customization = new Customization(cardLayout,cards);
@@ -36,18 +43,7 @@ public class MainWindow extends JFrame {
 
         cardLayout.show(cards,"library");
 
-        addMusicPlayer();
-
         add(cards);
     }
 
-    public void addMusicPlayer(){
-        try {
-            playerGUI = new PlayerGUI();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        playerGUI.temporaryGUI(cardLayout, cards);
-        cards.add(playerGUI,"player");
-    }
 }

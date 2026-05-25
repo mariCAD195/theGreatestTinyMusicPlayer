@@ -30,7 +30,7 @@ public class AudioPlayer extends PlaybackListener {
 
             advancedPlayer = new AdvancedPlayer(bufferedInputStream);
             advancedPlayer.setPlayBackListener(this);
-            
+
             startMusicThread();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -41,17 +41,20 @@ public class AudioPlayer extends PlaybackListener {
 
     public void pauseSong() {
         if(advancedPlayer!=null){
+            System.out.println("here");
             paused = true;
             stopSong();
         }
     }
 
     public void resumeSong() {
+        paused = false;
         startMusicThread();
     }
 
     public void stopSong() {
         if(advancedPlayer!=null){
+            System.out.println("here");
             advancedPlayer.stop();
             advancedPlayer.close();
             advancedPlayer = null;
@@ -77,13 +80,15 @@ public class AudioPlayer extends PlaybackListener {
 
     @Override
     public void playbackStarted(PlaybackEvent evt) {
-        super.playbackStarted(evt);
+        System.out.println("playbackStarted");
     }
 
     @Override
     public void playbackFinished(PlaybackEvent evt) {
+        System.out.println("playbackFinished");
         if(paused){
-            currentSongPosition += (int)((double)evt.getFrame()*currentSong.getFrameRate());
+            currentSongPosition = evt.getFrame();
+            //currentSongPosition += (int)((double)evt.getFrame()*currentSong.getFrameRate());
         }
     }
 

@@ -4,8 +4,6 @@ import java.awt.*;
 public class PlayerGUI extends Background{
 
     private AudioPlayer audioPlayer;
-    private JLayeredPane layeredPane;
-    private JLabel backgroundImage;
     private Vinyl vinyl;
     private Buttons buttons;
     private JLabel songTitle = new JLabel();
@@ -20,11 +18,9 @@ public class PlayerGUI extends Background{
         super("/assets/deathBedBackground.png");
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(false);
-
-        audioPlayer = new AudioPlayer();
     }
 
-    public void temporaryGUI(CardLayout cardLayout, JPanel cards) {
+    public void temporaryGUI(CardLayout cardLayout, JPanel cards, AudioPlayer audioPlayer) {
 
         vinyl = new Vinyl("/assets/deathBedVinyl.png");
         Dimension vinylDimension = new Dimension(400,400);
@@ -36,6 +32,7 @@ public class PlayerGUI extends Background{
         vinyl.startSpinning();
         add(vinyl);
 
+        this.audioPlayer = audioPlayer;
         updateSong(audioPlayer.getCurrentSong());
 
         Dimension songTitleDimension = new Dimension(280,35);
