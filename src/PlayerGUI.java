@@ -66,7 +66,7 @@ public class PlayerGUI extends Background{
         playbackSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(playbackSlider);
 
-        buttons = new Buttons(vinyl);
+        buttons = new Buttons(vinyl, audioPlayer);
         buttons.addButtons();
         add(buttons);
 

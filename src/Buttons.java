@@ -12,11 +12,11 @@ public class Buttons extends JPanel{
     private AudioPlayer audioPlayer;
     private Vinyl vinyl;
 
-    public Buttons(Vinyl vinyl) {
+    public Buttons(Vinyl vinyl, AudioPlayer audioPlayer){
         super();
         dataLoading = new DataLoading();
         this.vinyl = vinyl;
-        audioPlayer = new AudioPlayer();
+        this.audioPlayer = audioPlayer;
         setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         setOpaque(false);
     }
