@@ -19,8 +19,18 @@ public class LoadingScreen extends JFrame {
         setIconImage(icon.getImage());
 
         loadingBar = new JSlider(JSlider.HORIZONTAL,0,100,0);
+        loadingBar.setSize(250,40);
+        Dimension loadingBarDimensions = new Dimension(250,40);
+        loadingBar.setMaximumSize(loadingBarDimensions);
+        loadingBar.setMaximumSize(loadingBarDimensions);
+        loadingBar.setPreferredSize(loadingBarDimensions);
         loadingBar.setPaintTicks(true);
         loadingBar.setPaintLabels(true);
+        loadingBar.setUI(new SliderUI(loadingBar, new Color(110, 81, 200)));
+        loadingBar.setOpaque(false);
+        loadingBar.setBackground(null);
+        loadingBar.setSnapToTicks(false);
+        loadingBar.setFocusable(false);
         add(loadingBar,BorderLayout.NORTH);
 
         start = new JButton("Let's Play");
