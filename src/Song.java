@@ -118,4 +118,8 @@ public class Song {
     public Theme getSongsTheme() {
         return songsTheme;
     }
+
+    public void setSongsTheme(Theme songsTheme) {
+        this.songsTheme = songsTheme;
+    }
 }

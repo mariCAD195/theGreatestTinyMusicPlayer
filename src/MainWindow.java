@@ -35,7 +35,7 @@ public class MainWindow extends JFrame {
         queue = new Queue(cardLayout,cards,playerGUI);
         cards.add(queue,"queue");
 
-        customization = new Customization(cardLayout,cards);
+        customization = new Customization(cardLayout,cards,queue.getAudioPlayer());
         cards.add(customization,"customization");
 
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);

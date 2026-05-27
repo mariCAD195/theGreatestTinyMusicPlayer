@@ -98,4 +98,8 @@ public class Queue extends JPanel {
     public boolean isReadyToPlay() {
         return readyToPlay;
     }
+
+    public AudioPlayer getAudioPlayer() {
+        return audioPlayer;
+    }
 }

@@ -31,4 +31,11 @@ public class Theme {
     public Color getProgressBar() {
         return progressBar;
     }
+
+    @Override
+    public String toString() {
+        return "Theme{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

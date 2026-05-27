@@ -7,10 +7,12 @@ public class Customization extends JPanel {
     private AudioPlayer audioPlayer;
     private JButton chooseTheme;
 
-    public Customization(CardLayout cardLayout, JPanel cards) {
+    public Customization(CardLayout cardLayout, JPanel cards,AudioPlayer audioPlayer) {
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(true);
+
+        this.audioPlayer = audioPlayer;
 
         setBackground(new Color(154, 239, 27));
 
@@ -20,7 +22,7 @@ public class Customization extends JPanel {
     public void load(CardLayout cardLayout, JPanel cards){
         chooseTheme = new JButton("choose theme");
         chooseTheme.addActionListener(e -> {
-            themeManager = new ThemeManager();
+            themeManager = new ThemeManager(audioPlayer);
             themeManager.setVisible(true);
         });
 
@@ -32,5 +34,9 @@ public class Customization extends JPanel {
         });
 
         add(back);
+    }
+
+    public void changeTheme(){
+        audioPlayer.getCurrentSong().setSongsTheme(themeManager.getSelected());
     }
 }
