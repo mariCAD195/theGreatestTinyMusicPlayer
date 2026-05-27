@@ -22,7 +22,7 @@ public class Queue extends JPanel {
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(true);
 
-        setBackground(new Color(239, 27, 197));
+        setBackground(new Color(239, 211, 27));
 
         this.playerGUI = playerGUI;
         setLayout(new BoxLayout(this,BoxLayout.X_AXIS));

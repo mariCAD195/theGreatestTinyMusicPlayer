@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Customization extends JPanel {
+
+    private ThemeManager themeManager;
+    private AudioPlayer audioPlayer;
+    private JButton chooseTheme;
+
     public Customization(CardLayout cardLayout, JPanel cards) {
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -9,11 +14,18 @@ public class Customization extends JPanel {
 
         setBackground(new Color(154, 239, 27));
 
-        setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         load(cardLayout, cards);
     }
 
     public void load(CardLayout cardLayout, JPanel cards){
+        chooseTheme = new JButton("choose theme");
+        chooseTheme.addActionListener(e -> {
+            themeManager = new ThemeManager();
+            themeManager.setVisible(true);
+        });
+
+        add(chooseTheme);
+
         JButton back = new JButton("Back");
         back.addActionListener(e -> {
             cardLayout.show(cards,"player");

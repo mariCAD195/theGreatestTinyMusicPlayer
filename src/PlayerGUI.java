@@ -10,6 +10,7 @@ public class PlayerGUI extends Background{
     private JLabel songArtist = new JLabel();
     private JSlider playbackSlider;
     private MenuPanel menuPanel;
+    private Theme currentTheme;
 
     /**
      * JFrame setup
@@ -21,6 +22,8 @@ public class PlayerGUI extends Background{
     }
 
     public void temporaryGUI(CardLayout cardLayout, JPanel cards, AudioPlayer audioPlayer) {
+
+        currentTheme = audioPlayer.getCurrentSong().getSongsTheme();
 
         vinyl = new Vinyl("/assets/deathBedVinyl.png");
         Dimension vinylDimension = new Dimension(400,400);

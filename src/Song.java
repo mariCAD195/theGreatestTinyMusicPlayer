@@ -29,6 +29,7 @@ public class Song {
     private Color progressBarColor;
     private Mp3File mp3File;
     private double frameRate;
+    private Theme songsTheme;
 
     public Song(String filePath,Color color) {
         this.filePath = filePath;
@@ -56,6 +57,7 @@ public class Song {
 
         this.songsAssets = new HashMap<>();
         this.progressBarColor = color;
+
     }
     public void mathPleaseKillMe(String filePath){
         try {
@@ -111,5 +113,9 @@ public class Song {
 
     public double getFrameRate() {
         return frameRate;
+    }
+
+    public Theme getSongsTheme() {
+        return songsTheme;
     }
 }

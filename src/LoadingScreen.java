@@ -6,6 +6,7 @@ public class LoadingScreen extends JFrame {
 
     private JButton start;
     private JSlider loadingBar;
+    private JPanel panel;
 
     public LoadingScreen() {
         super("well hello there");
@@ -17,6 +18,15 @@ public class LoadingScreen extends JFrame {
 
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
+
+        panel = new JPanel();
+        panel();
+        add(panel);
+    }
+
+    public void panel(){
+        panel.setBackground(new Color(0, 255, 178));
+        panel.setLayout(new BorderLayout());
 
         loadingBar = new JSlider(JSlider.HORIZONTAL,0,100,0);
         loadingBar.setSize(250,40);
@@ -31,10 +41,10 @@ public class LoadingScreen extends JFrame {
         loadingBar.setBackground(null);
         loadingBar.setSnapToTicks(false);
         loadingBar.setFocusable(false);
-        add(loadingBar,BorderLayout.NORTH);
+        panel.add(loadingBar,BorderLayout.NORTH);
 
         start = new JButton("Let's Play");
-        add(start,BorderLayout.CENTER);
+        panel.add(start,BorderLayout.CENTER);
         start.setVisible(false);
     }
 
@@ -55,6 +65,11 @@ public class LoadingScreen extends JFrame {
     }
 
     public void button(){
+        start.setBackground(null);
+        start.setOpaque(false);
+        start.setFocusPainted(false);
+        start.setContentAreaFilled(false);
+        start.setBorderPainted(false);
 
         start.setVisible(true);
         start.addActionListener(e -> {
