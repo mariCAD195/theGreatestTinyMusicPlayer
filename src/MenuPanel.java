@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * panel storing all buttons controlling panel switching
+ * @author mari
+ */
 public class MenuPanel extends JPanel {
 
     private JButton allPlaylists;
@@ -29,6 +33,11 @@ public class MenuPanel extends JPanel {
         }
     }
 
+    /**
+     * adds buttons to the panel
+     * @param cardLayout global card layout used
+     * @param cards all panels stored in global card layout
+     */
     public void addButtons(CardLayout cardLayout, JPanel cards){
         add(Box.createRigidArea(new Dimension(15, 0)));
 
@@ -63,6 +72,11 @@ public class MenuPanel extends JPanel {
         makeThemDoStuff(cardLayout, cards);
     }
 
+    /**
+     * makes buttons switch between panels
+     * @param cardLayout global card layout
+     * @param cards panels stored in global card layout
+     */
     public void makeThemDoStuff(CardLayout cardLayout, JPanel cards){
         allPlaylists.addActionListener(e -> {
             cardLayout.show(cards,"library");

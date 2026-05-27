@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * manages a JFrame that lets the user change the app theme
+ * @author mari
+ */
 public class ThemeManager extends JFrame{
 
     private HashMap<String,Theme> themes;
-    private ArrayList<JButton> options;
     private Theme selected;
     private AudioPlayer audioPlayer;
 
@@ -37,6 +39,9 @@ public class ThemeManager extends JFrame{
         setLayout(new GridLayout(themes.size(),0));
     }
 
+    /**
+     * changes the theme for the currently playing song
+     */
     public void changeTheme(){
         audioPlayer.getCurrentSong().setSongsTheme(selected);
     }

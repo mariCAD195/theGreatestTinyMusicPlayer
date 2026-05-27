@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * manages the music player control buttons
+ * @author mari
+ */
 public class Buttons extends JPanel{
 
     private JButton previousButton;

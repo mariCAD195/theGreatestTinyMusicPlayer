@@ -6,6 +6,11 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * manages the audio
+ * @author (youtube guys username)
+ * edited by mari
+ */
 public class AudioPlayer extends PlaybackListener {
 
     private Song currentSong;

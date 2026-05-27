@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * the main music player you see when you play music
+ * @author mari
+ */
 public class PlayerGUI extends Background{
 
     private AudioPlayer audioPlayer;
@@ -12,14 +16,12 @@ public class PlayerGUI extends Background{
     private MenuPanel menuPanel;
     private Theme currentTheme;
 
-    /**
-     * JFrame setup
-     */
     public PlayerGUI() throws Exception {
         super("/assets/deathBedBackground.png");
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(false);
     }
+
 
     public void temporaryGUI(CardLayout cardLayout, JPanel cards, AudioPlayer audioPlayer) {
 
@@ -87,6 +89,10 @@ public class PlayerGUI extends Background{
 
     }
 
+    /**
+     * updates UI with every song
+     * @param song currently playing song
+     */
     public void updateSong(Song song) {
         songTitle.setText(song.getSongTitle());
         songArtist.setText(song.getSongArtist());

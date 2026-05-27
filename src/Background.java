@@ -2,18 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
+/**
+ * allows JPanels to have a custom image as a background
+ * @author matej pospisil, edited by mari
+ */
 public class Background extends JPanel {
     private Image img;
-
-    public Background(){
-        super();
-        //setCursor();
-    }
 
     public Background(String imgFile) throws Exception {
         super();
         loadImage(imgFile);
-        //setCursor();
     }
 
     private void loadImage(String imgFile) throws Exception {
@@ -32,14 +30,4 @@ public class Background extends JPanel {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
     }
 
-//    private void setCursor(){
-//        Toolkit toolkit = Toolkit.getDefaultToolkit();
-//        Image cursorImg = toolkit.getImage(getClass().getResource("/MainUI/MAIN_CURSOR.png"));
-//        Cursor customCursor = toolkit.createCustomCursor(cursorImg, new Point(0, 0), "cursorName");
-//        this.setCursor(customCursor);
-//    }
-
-    public void setImg(String image) throws Exception {
-        loadImage(image);
-    }
 }

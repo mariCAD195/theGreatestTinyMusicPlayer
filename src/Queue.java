@@ -5,6 +5,10 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * displays users selected playlist
+ * @author mari
+ */
 public class Queue extends JPanel {
 
     private JButton addSong;

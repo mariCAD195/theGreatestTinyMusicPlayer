@@ -25,7 +25,7 @@ public class LoadingScreen extends JFrame {
     }
 
     public void panel(){
-        panel.setBackground(new Color(0, 255, 178));
+        panel.setBackground(new Color(221, 162, 163));
         panel.setLayout(new BorderLayout());
 
         loadingBar = new JSlider(JSlider.HORIZONTAL,0,100,0);
@@ -43,7 +43,7 @@ public class LoadingScreen extends JFrame {
         loadingBar.setFocusable(false);
         panel.add(loadingBar,BorderLayout.NORTH);
 
-        start = new JButton("Let's Play");
+        start = new JButton("PLAY");
         panel.add(start,BorderLayout.CENTER);
         start.setVisible(false);
     }
@@ -70,6 +70,9 @@ public class LoadingScreen extends JFrame {
         start.setFocusPainted(false);
         start.setContentAreaFilled(false);
         start.setBorderPainted(false);
+
+        start.setFont(DataLoading.loadFont("/fonts/Daydream DEMO.otf",40));
+        start.setForeground(Color.black);
 
         start.setVisible(true);
         start.addActionListener(e -> {

@@ -1,5 +1,9 @@
 import java.awt.*;
 
+/**
+ * stores individual asset file paths
+ * @author mari
+ */
 public class Theme {
 
     private String name;

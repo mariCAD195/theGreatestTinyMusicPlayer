@@ -3,7 +3,7 @@ import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 
 /**
- * manages ui look of the progress bar
+ * manages ui look for JSliders
  * @author chatGPT, Mari
  */
 public class SliderUI extends BasicSliderUI {

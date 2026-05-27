@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * main JFrame storing all panels
+ * @author mari
+ */
 public class MainWindow extends JFrame {
 
     private PlayerGUI playerGUI;
@@ -11,6 +15,9 @@ public class MainWindow extends JFrame {
     private Customization customization;
     private JPanel cards;
 
+    /**
+     * loads the app and all panels
+     */
     public MainWindow(){
         super("well hello there");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

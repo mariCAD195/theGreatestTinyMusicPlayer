@@ -10,6 +10,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * loads app data and assets
+ * @author mari
+ */
 public class DataLoading {
 
     /**
@@ -29,6 +33,11 @@ public class DataLoading {
         return new ImageIcon(image.getScaledInstance(width,height, BufferedImage.SCALE_SMOOTH));
     }
 
+    /**
+     * loads an image as a bufferedImage
+     * @param path image file path
+     * @return loaded image
+     */
     public static BufferedImage loadBufferedImage(String path) {
         try {
             return ImageIO.read(DataLoading.class.getResource(path));
@@ -58,6 +67,11 @@ public class DataLoading {
         return font;
     }
 
+    /**
+     * loads music files
+     * @param path music file path
+     * @return loaded file
+     */
     public static AudioInputStream loadSong(String path){
         InputStream inputStream = DataLoading.class.getResourceAsStream(path);
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);

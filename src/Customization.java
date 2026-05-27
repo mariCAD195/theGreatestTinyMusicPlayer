@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * panel for managing customization and other settings
+ * @author mari
+ */
 public class Customization extends JPanel {
 
     private ThemeManager themeManager;
@@ -19,6 +23,11 @@ public class Customization extends JPanel {
         load(cardLayout, cards);
     }
 
+    /**
+     * loads used UI components
+     * @param cardLayout global card layout with other panels
+     * @param cards all panels stored in global card layout
+     */
     public void load(CardLayout cardLayout, JPanel cards){
         chooseTheme = new JButton("choose theme");
         chooseTheme.addActionListener(e -> {
@@ -36,7 +45,4 @@ public class Customization extends JPanel {
         add(back);
     }
 
-    public void changeTheme(){
-        audioPlayer.getCurrentSong().setSongsTheme(themeManager.getSelected());
-    }
 }
