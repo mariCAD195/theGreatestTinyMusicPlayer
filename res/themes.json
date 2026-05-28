@@ -1,0 +1,9 @@
+[
+  {
+    "name" : "Death Bed",
+    "background" : "/assets/deathBedBackground.png",
+    "vinyl" : "/assets/deathBedVinyl.png",
+    "font" : "/fonts/Daydream DEMO.otf",
+    "progressBar" : ""
+  }
+]

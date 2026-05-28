@@ -8,7 +8,7 @@ public class Theme {
 
     private String name;
     private String background;
-    private String Vinyl;
+    private String vinyl;
     private String font;
     private Color progressBar;
 
@@ -25,7 +25,7 @@ public class Theme {
     }
 
     public String getVinyl() {
-        return Vinyl;
+        return vinyl;
     }
 
     public String getFont() {

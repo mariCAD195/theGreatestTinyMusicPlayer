@@ -15,6 +15,7 @@ public class LoadingScreen extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(new BorderLayout(0,0));
+        DataLoading.loadTheme();
 
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());

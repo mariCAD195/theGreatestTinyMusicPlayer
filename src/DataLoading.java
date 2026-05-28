@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -5,10 +7,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * loads app data and assets
@@ -84,6 +84,23 @@ public class DataLoading {
             throw new RuntimeException(e);
         }
         return audioInputStream;
+    }
+
+    public static Theme loadTheme() {
+        Gson gson = new Gson();
+
+        try (InputStream is = new FileInputStream("/assets/themes.json")) {
+            if (is == null) {
+                throw new IllegalStateException("not found");
+            }
+            return gson.fromJson(
+                    new InputStreamReader(is, StandardCharsets.UTF_8),
+                    Theme.class
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("error" + e.getMessage());
+        }
+
     }
 
 }
