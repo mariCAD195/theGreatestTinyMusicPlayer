@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * loads app data and assets
@@ -86,21 +89,20 @@ public class DataLoading {
         return audioInputStream;
     }
 
-    public static Theme loadTheme() {
+
+    public static void loadTheme(ThemeManager themeManager) {
         Gson gson = new Gson();
 
-        try (InputStream is = new FileInputStream("/assets/themes.json")) {
-            if (is == null) {
-                throw new IllegalStateException("not found");
-            }
-            return gson.fromJson(
-                    new InputStreamReader(is, StandardCharsets.UTF_8),
-                    Theme.class
-            );
-        } catch (Exception e) {
-            throw new RuntimeException("error" + e.getMessage());
-        }
+        try (InputStream is = new FileInputStream("res/themes.json")) {
 
+            Theme[] themes = gson.fromJson(new InputStreamReader(is), Theme[].class);
+            for (Theme theme : themes) {
+                themeManager.getThemes().put(theme.getName(), theme);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("error " + e.getMessage());
+        }
     }
 
 }

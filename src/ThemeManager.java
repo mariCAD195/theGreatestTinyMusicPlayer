@@ -21,10 +21,7 @@ public class ThemeManager extends JFrame{
         this.audioPlayer = audioPlayer;
 
         themes = new HashMap<>();
-        Theme testTheme = new Theme("test");
-        themes.put("test",testTheme);
-
-        themes.put("test2",new Theme("test2"));
+        DataLoading.loadTheme(this);
 
         for(Theme theme : themes.values()){
             JButton option = new JButton(theme.getName());
@@ -48,5 +45,9 @@ public class ThemeManager extends JFrame{
 
     public Theme getSelected() {
         return selected;
+    }
+
+    public HashMap<String, Theme> getThemes() {
+        return themes;
     }
 }

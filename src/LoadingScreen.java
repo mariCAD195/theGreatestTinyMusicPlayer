@@ -15,7 +15,6 @@ public class LoadingScreen extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(new BorderLayout(0,0));
-        DataLoading.loadTheme();
 
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
@@ -54,8 +53,8 @@ public class LoadingScreen extends JFrame {
 
         for (int i = 0; i < loadingBar.getMaximum();) {
             try {
-                Thread.sleep(rd.nextInt(1,500));
-                loadingBar.setValue(loadingBar.getValue()+rd.nextInt(10,50));
+                Thread.sleep(rd.nextInt(499) + 1);
+                loadingBar.setValue(loadingBar.getValue()+rd.nextInt(40) + 10);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

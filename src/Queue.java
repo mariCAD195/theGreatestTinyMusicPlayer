@@ -1,4 +1,3 @@
-import javax.smartcardio.Card;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -29,24 +28,18 @@ public class Queue extends JPanel {
         setBackground(new Color(239, 211, 27));
 
         this.playerGUI = playerGUI;
-        setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
         load(cardLayout, cards);
         songList = new ArrayList<>();
 
     }
 
-    public void load(CardLayout cardLayout, JPanel cards){
-        addSong = new JButton("Add Song");
-        add(addSong);
-
-        JButton back = new JButton("Back");
-        back.addActionListener(e -> {
-            cardLayout.show(cards,"player");
-        });
-
-        add(back);
-        makeItDoSomething();
+    public void load(CardLayout cardLayout, JPanel cards) {
         play(cardLayout, cards);
+
+        addSong = new JButton("Add Song");
+        add(addSong,CENTER_ALIGNMENT);
+
+        makeItDoSomething();
     }
 
     public void makeItDoSomething(){
@@ -84,13 +77,27 @@ public class Queue extends JPanel {
     }
 
     public void play(CardLayout cardLayout, JPanel cards) {
-        playButton = new JButton("Play");
-        add(playButton);
+        playButton = new JButton(DataLoading.loadAssets("res/assets/playButton.png",50,50));
+        playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        playButton.setBorderPainted(false);
+        playButton.setContentAreaFilled(false);
+        playButton.setFocusPainted(false);
+        playButton.setOpaque(false);
+        JPanel playWrapper = new JPanel();
+        playWrapper.setOpaque(false);
+        playWrapper.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        playWrapper.add(playButton);
+        add(playWrapper);
         playButton.addActionListener(e -> {
             if (!songList.isEmpty()) {
-                audioPlayer.loadSong(songList.getFirst());
+                audioPlayer.loadSong(songList.get(0));
                 readyToPlay = true;
-                playerGUI.temporaryGUI(cardLayout, cards,audioPlayer);
+                if (playerGUI.getCurrentTheme() != null) {
+                    playerGUI.temporaryGUI(cardLayout, cards,audioPlayer);
+                }else{
+                    playerGUI.defaultGUI(cardLayout,cards);
+                }
                 cardLayout.show(cards,"player");
             }else{
                 newDialog("no songs",300,150);

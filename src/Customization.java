@@ -17,6 +17,7 @@ public class Customization extends JPanel {
         setOpaque(true);
 
         this.audioPlayer = audioPlayer;
+        themeManager = new ThemeManager(audioPlayer);
 
         setBackground(new Color(154, 239, 27));
 
@@ -31,7 +32,6 @@ public class Customization extends JPanel {
     public void load(CardLayout cardLayout, JPanel cards){
         chooseTheme = new JButton("choose theme");
         chooseTheme.addActionListener(e -> {
-            themeManager = new ThemeManager(audioPlayer);
             themeManager.setVisible(true);
         });
 
@@ -45,4 +45,7 @@ public class Customization extends JPanel {
         add(back);
     }
 
+    public ThemeManager getThemeManager() {
+        return themeManager;
+    }
 }

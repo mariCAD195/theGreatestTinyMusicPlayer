@@ -13,7 +13,6 @@ import org.jaudiotagger.tag.TagException;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Song {
@@ -21,11 +20,6 @@ public class Song {
     private String songTitle;
     private String songArtist;
     private String filePath;
-    private HashMap<String,String> songsAssets;
-    private String backgroundFilePath;
-    private String vinylFilePath;
-    private String fontFilePath;
-    private Color progressBarColor;
     private Mp3File mp3File;
     private double frameRate;
     private Theme songsTheme;
@@ -53,9 +47,6 @@ public class Song {
         } catch (InvalidAudioFrameException e) {
             throw new RuntimeException(e);
         }
-
-        this.songsAssets = new HashMap<>();
-        this.progressBarColor = color;
 
     }
     public void mathPleaseKillMe(String filePath){

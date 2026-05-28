@@ -10,10 +10,11 @@ public class Theme {
     private String background;
     private String vinyl;
     private String font;
-    private Color progressBar;
+    private int[] progressBarColor;
 
     public Theme(String name) {
         this.name = name;
+        this.progressBarColor = new int[3];
     }
 
     public String getName() {
@@ -32,8 +33,16 @@ public class Theme {
         return font;
     }
 
-    public Color getProgressBar() {
-        return progressBar;
+    public int getProgressBarColorR() {
+        return progressBarColor[0];
+    }
+
+    public int getProgressBarColorG() {
+        return progressBarColor[1];
+    }
+
+    public int getProgressBarColorB() {
+        return progressBarColor[2];
     }
 
     @Override

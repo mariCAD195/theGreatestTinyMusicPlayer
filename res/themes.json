@@ -4,6 +4,13 @@
     "background" : "/assets/deathBedBackground.png",
     "vinyl" : "/assets/deathBedVinyl.png",
     "font" : "/fonts/Daydream DEMO.otf",
-    "progressBar" : ""
+    "progressBarColor" : [110,81,200]
+  },
+  {
+    "name" : "default",
+    "background" : "/assets/defaultBackground.png",
+    "vinyl" : "/assets/defaultVinyl.png",
+    "font" : "/fonts/Minecraftia-Regular.ttf",
+    "progressBarColor" : [138,72,72]
   }
 ]
