@@ -15,10 +15,10 @@ public class Queue extends JPanel {
     private Song song;
     private AudioPlayer audioPlayer;
     private JButton playButton;
-    private ArrayList<Song> songList;
     private Dialog dialog;
     private boolean readyToPlay;
     private PlayerGUI playerGUI;
+    private SongPanel songPanel;
 
     public Queue(CardLayout cardLayout, JPanel cards, PlayerGUI playerGUI) {
         super();
@@ -29,7 +29,6 @@ public class Queue extends JPanel {
 
         this.playerGUI = playerGUI;
         load(cardLayout, cards);
-        songList = new ArrayList<>();
 
     }
 
@@ -38,6 +37,8 @@ public class Queue extends JPanel {
 
         addSong = new JButton("Add Song");
         add(addSong,CENTER_ALIGNMENT);
+
+        songPanel = new SongPanel();
 
         makeItDoSomething();
     }
@@ -59,7 +60,9 @@ public class Queue extends JPanel {
 
             if (selected != null) {
                 song = new Song(selected.getPath(), new Color(0,0,0));
-                songList.add(song);
+                songPanel.addSong(song);
+                songPanel.loadSongs();
+                songPanel.repaint();
             }
         });
     }
@@ -90,8 +93,8 @@ public class Queue extends JPanel {
         playWrapper.add(playButton);
         add(playWrapper);
         playButton.addActionListener(e -> {
-            if (!songList.isEmpty()) {
-                audioPlayer.loadSong(songList.get(0));
+            if (!songPanel.getSongs().isEmpty()) {
+                audioPlayer.loadSong(songPanel.getSongs().get(0));
                 readyToPlay = true;
                 if (playerGUI.getCurrentTheme() != null) {
                     playerGUI.updateGUI(audioPlayer);

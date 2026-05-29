@@ -9,17 +9,17 @@ public class Library extends JPanel {
     private JLabel title2;
     private PlaylistPanel playlistPanel;
 
-    public Library() {
+    public Library(CardLayout cardLayout, JPanel cards) {
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(true);
 
         setBackground(new Color(27, 94, 239));
 
-        load();
+        load(cardLayout, cards);
     }
 
-    public void load(){
+    public void load(CardLayout cardLayout, JPanel cards){
 
         add(Box.createRigidArea(new Dimension(0, 15)));
 
@@ -43,7 +43,7 @@ public class Library extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0, 15)));
 
-        playlistPanel = new PlaylistPanel();
+        playlistPanel = new PlaylistPanel(cardLayout, cards);
         add(playlistPanel);
 
     }

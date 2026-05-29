@@ -30,7 +30,7 @@ public class MainWindow extends JFrame {
         cards = new JPanel(cardLayout);
         cards.setOpaque(false);
 
-        library = new Library();
+        library = new Library(cardLayout, cards);
         cards.add(library,"library");
 
         try {
@@ -64,7 +64,7 @@ public class MainWindow extends JFrame {
             createPlaylist = new CreatePlaylist(newPlaylist,cardLayout,cards);
 
             library.getPlaylistPanel().addPlaylist(newPlaylist);
-            library.getPlaylistPanel().loadPanel();
+            library.getPlaylistPanel().loadPanel(cardLayout,cards);
         });
 
         customization.getBack().addActionListener(e -> {

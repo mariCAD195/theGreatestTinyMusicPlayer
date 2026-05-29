@@ -11,17 +11,17 @@ public class PlaylistPanel extends JPanel {
     private HashMap<String,Playlist> playlists;
     private Playlist selected;
 
-    public PlaylistPanel(){
+    public PlaylistPanel(CardLayout cardLayout, JPanel cards) {
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(false);
 
         playlists = new HashMap<>();
         playlists.put("Showcase playlist",showcasePlaylist());
 
-        loadPanel();
+        loadPanel(cardLayout, cards);
     }
 
-    public void loadPanel(){
+    public void loadPanel(CardLayout cardLayout, JPanel cards){
         for(Playlist playlist : playlists.values()){
             JButton option = new JButton(playlist.getName());
 
@@ -34,6 +34,7 @@ public class PlaylistPanel extends JPanel {
 
             option.addActionListener(e -> {
                 selected = playlists.get(option.getText());
+                cardLayout.show(cards, "queue");
             });
             add(option);
         }
@@ -50,10 +51,6 @@ public class PlaylistPanel extends JPanel {
 
         playlists.put(showcase.getName(), showcase);
         return showcase;
-    }
-
-    public void openPlaylist(Playlist playlist){
-
     }
 
 }

@@ -14,7 +14,7 @@ public class LoadingScreen extends JFrame {
         setSize(300,200);
         setLocationRelativeTo(null);
         setResizable(false);
-        setLayout(new BorderLayout(0,0));
+        setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
 
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
@@ -26,25 +26,27 @@ public class LoadingScreen extends JFrame {
 
     public void panel(){
         panel.setBackground(new Color(221, 162, 163));
-        panel.setLayout(new BorderLayout());
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+
+        add(Box.createRigidArea(new Dimension(0, 15)));
 
         loadingBar = new JSlider(JSlider.HORIZONTAL,0,100,0);
-        loadingBar.setSize(250,40);
         Dimension loadingBarDimensions = new Dimension(250,40);
         loadingBar.setMaximumSize(loadingBarDimensions);
-        loadingBar.setMaximumSize(loadingBarDimensions);
+        loadingBar.setMinimumSize(loadingBarDimensions);
         loadingBar.setPreferredSize(loadingBarDimensions);
         loadingBar.setPaintTicks(true);
         loadingBar.setPaintLabels(true);
-        loadingBar.setUI(new SliderUI(loadingBar, new Color(110, 81, 200)));
+        loadingBar.setUI(new SliderUI(loadingBar, new Color(118, 52, 96)));
         loadingBar.setOpaque(false);
         loadingBar.setBackground(null);
         loadingBar.setSnapToTicks(false);
         loadingBar.setFocusable(false);
-        panel.add(loadingBar,BorderLayout.NORTH);
+        loadingBar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(loadingBar);
 
         start = new JButton("PLAY");
-        panel.add(start,BorderLayout.CENTER);
+        panel.add(start);
         start.setVisible(false);
     }
 
@@ -70,6 +72,7 @@ public class LoadingScreen extends JFrame {
         start.setFocusPainted(false);
         start.setContentAreaFilled(false);
         start.setBorderPainted(false);
+        start.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         start.setFont(DataLoading.loadFont("/fonts/Daydream DEMO.otf",40));
         start.setForeground(Color.black);

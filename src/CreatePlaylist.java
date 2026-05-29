@@ -28,6 +28,7 @@ public class CreatePlaylist extends JDialog {
                         playlist.setName(text);
                         playlistName.setText("");
                         cardLayout.show(cards,"queue");
+                        dispose();
                     }
                 }
             }
