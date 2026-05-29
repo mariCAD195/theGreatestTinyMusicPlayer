@@ -14,6 +14,7 @@ public class MainWindow extends JFrame {
     private Queue queue;
     private Customization customization;
     private JPanel cards;
+    private CreatePlaylist createPlaylist;
 
     /**
      * loads the app and all panels
@@ -59,9 +60,11 @@ public class MainWindow extends JFrame {
 
     public void cardChange(){
         library.getNewPlaylist().addActionListener(e -> {
-            library.getPlaylistPanel().addPlaylist(new Playlist());
+            Playlist newPlaylist = new Playlist();
+            createPlaylist = new CreatePlaylist(newPlaylist,cardLayout,cards);
+
+            library.getPlaylistPanel().addPlaylist(newPlaylist);
             library.getPlaylistPanel().loadPanel();
-            cardLayout.show(cards,"queue");
         });
 
         customization.getBack().addActionListener(e -> {

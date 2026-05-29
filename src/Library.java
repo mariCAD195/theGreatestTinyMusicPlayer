@@ -26,20 +26,25 @@ public class Library extends JPanel {
         title = new JLabel("Welcome to your library");
         title.setFont(DataLoading.loadFont("/fonts/alagard.ttf",30));
         title.setForeground(Color.BLACK);
-        add(title,CENTER_ALIGNMENT);
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(title);
 
         title2 = new JLabel("what's the vibe today?");
         title2.setFont(DataLoading.loadFont("/fonts/alagard.ttf",30));
         title2.setForeground(Color.BLACK);
-        add(title2, CENTER_ALIGNMENT);
+        title2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(title2);
 
         add(Box.createRigidArea(new Dimension(0, 15)));
 
         newPlaylist = new JButton("New Playlist");
-        add(newPlaylist,CENTER_ALIGNMENT);
+        newPlaylist.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(newPlaylist);
+
+        add(Box.createRigidArea(new Dimension(0, 15)));
 
         playlistPanel = new PlaylistPanel();
-        add(playlistPanel,CENTER_ALIGNMENT);
+        add(playlistPanel);
 
     }
 
