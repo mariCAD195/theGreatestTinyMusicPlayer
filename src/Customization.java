@@ -10,18 +10,19 @@ public class Customization extends JPanel {
     private ThemeManager themeManager;
     private AudioPlayer audioPlayer;
     private JButton chooseTheme;
+    private JButton back;
 
-    public Customization(CardLayout cardLayout, JPanel cards,AudioPlayer audioPlayer) {
+    public Customization(AudioPlayer audioPlayer,PlayerGUI playerGUI) {
         super();
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setOpaque(true);
 
         this.audioPlayer = audioPlayer;
-        themeManager = new ThemeManager(audioPlayer);
+        themeManager = new ThemeManager(audioPlayer,playerGUI);
 
         setBackground(new Color(154, 239, 27));
 
-        load(cardLayout, cards);
+        load();
     }
 
     /**
@@ -29,7 +30,7 @@ public class Customization extends JPanel {
      * @param cardLayout global card layout with other panels
      * @param cards all panels stored in global card layout
      */
-    public void load(CardLayout cardLayout, JPanel cards){
+    public void load(){
         chooseTheme = new JButton("choose theme");
         chooseTheme.addActionListener(e -> {
             themeManager.setVisible(true);
@@ -37,15 +38,16 @@ public class Customization extends JPanel {
 
         add(chooseTheme);
 
-        JButton back = new JButton("Back");
-        back.addActionListener(e -> {
-            cardLayout.show(cards,"player");
-        });
+        back = new JButton("Back");
 
         add(back);
     }
 
     public ThemeManager getThemeManager() {
         return themeManager;
+    }
+
+    public JButton getBack() {
+        return back;
     }
 }

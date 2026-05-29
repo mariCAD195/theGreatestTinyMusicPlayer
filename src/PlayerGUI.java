@@ -22,7 +22,7 @@ public class PlayerGUI extends Background{
         setOpaque(false);
     }
 
-    public void temporaryGUI(CardLayout cardLayout, JPanel cards, AudioPlayer audioPlayer) {
+    public void updateGUI(AudioPlayer audioPlayer) {
 
         currentTheme = audioPlayer.getCurrentSong().getSongsTheme();
 
@@ -77,7 +77,7 @@ public class PlayerGUI extends Background{
         add(Box.createRigidArea(new Dimension(0, 15)));
 
         menuPanel = new MenuPanel();
-        menuPanel.addButtons(cardLayout, cards);
+        menuPanel.addButtons();
         Dimension menuDimension = new Dimension(270,60);
         menuPanel.setAlignmentX(CENTER_ALIGNMENT);
         menuPanel.setSize(menuDimension);
@@ -97,7 +97,7 @@ public class PlayerGUI extends Background{
         songArtist.setText(song.getSongArtist());
     }
 
-    public void defaultGUI(CardLayout cardLayout, JPanel cards) {
+    public void defaultGUI() {
         vinyl = new Vinyl("/assets/defaultVinyl.png");
         Dimension vinylDimension = new Dimension(400,400);
         vinyl.setSize(vinylDimension);
@@ -145,7 +145,7 @@ public class PlayerGUI extends Background{
         add(Box.createRigidArea(new Dimension(0, 15)));
 
         menuPanel = new MenuPanel();
-        menuPanel.addButtons(cardLayout, cards);
+        menuPanel.addButtons();
         Dimension menuDimension = new Dimension(270,60);
         menuPanel.setAlignmentX(CENTER_ALIGNMENT);
         menuPanel.setSize(menuDimension);
@@ -157,6 +157,10 @@ public class PlayerGUI extends Background{
 
     public Theme getCurrentTheme() {
         return currentTheme;
+    }
+
+    public MenuPanel getMenuPanel() {
+        return menuPanel;
     }
 }
 

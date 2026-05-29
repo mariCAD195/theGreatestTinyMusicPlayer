@@ -38,7 +38,7 @@ public class MenuPanel extends JPanel {
      * @param cardLayout global card layout used
      * @param cards all panels stored in global card layout
      */
-    public void addButtons(CardLayout cardLayout, JPanel cards){
+    public void addButtons(){
         add(Box.createRigidArea(new Dimension(15, 0)));
 
         allPlaylists = new JButton(dataLoading.loadAssets("res/assets/playlists.png", 40, 40));
@@ -68,8 +68,6 @@ public class MenuPanel extends JPanel {
         customization.setBorderPainted(false);
         customization.setContentAreaFilled(false);
         add(customization);
-
-        makeThemDoStuff(cardLayout, cards);
     }
 
     /**

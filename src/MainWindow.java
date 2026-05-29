@@ -29,7 +29,7 @@ public class MainWindow extends JFrame {
         cards = new JPanel(cardLayout);
         cards.setOpaque(false);
 
-        library = new Library(cardLayout,cards);
+        library = new Library();
         cards.add(library,"library");
 
         try {
@@ -42,11 +42,11 @@ public class MainWindow extends JFrame {
         queue = new Queue(cardLayout,cards,playerGUI);
         cards.add(queue,"queue");
 
-        customization = new Customization(cardLayout,cards,queue.getAudioPlayer());
+        customization = new Customization(queue.getAudioPlayer(),playerGUI);
         cards.add(customization,"customization");
 
-        playerGUI.defaultGUI(cardLayout,cards);
         DataLoading.loadTheme(customization.getThemeManager());
+        playerGUI.defaultGUI();
 
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
@@ -54,6 +54,21 @@ public class MainWindow extends JFrame {
         cardLayout.show(cards,"library");
 
         add(cards);
+        cardChange();
+    }
+
+    public void cardChange(){
+        library.getNewPlaylist().addActionListener(e -> {
+            library.getPlaylistPanel().addPlaylist(new Playlist());
+            library.getPlaylistPanel().loadPanel();
+            cardLayout.show(cards,"queue");
+        });
+
+        customization.getBack().addActionListener(e -> {
+            cardLayout.show(cards,"player");
+        });
+
+        playerGUI.getMenuPanel().makeThemDoStuff(cardLayout,cards);
     }
 
 }

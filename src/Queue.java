@@ -94,9 +94,9 @@ public class Queue extends JPanel {
                 audioPlayer.loadSong(songList.get(0));
                 readyToPlay = true;
                 if (playerGUI.getCurrentTheme() != null) {
-                    playerGUI.temporaryGUI(cardLayout, cards,audioPlayer);
+                    playerGUI.updateGUI(audioPlayer);
                 }else{
-                    playerGUI.defaultGUI(cardLayout,cards);
+                    playerGUI.defaultGUI();
                 }
                 cardLayout.show(cards,"player");
             }else{

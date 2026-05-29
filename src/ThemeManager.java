@@ -12,7 +12,7 @@ public class ThemeManager extends JFrame{
     private Theme selected;
     private AudioPlayer audioPlayer;
 
-    public ThemeManager(AudioPlayer audioPlayer) {
+    public ThemeManager(AudioPlayer audioPlayer,PlayerGUI playerGUI) {
         super("well hello there");
         setSize(300,300);
         setLocationRelativeTo(null);
@@ -28,6 +28,7 @@ public class ThemeManager extends JFrame{
             option.addActionListener(e -> {
                 selected = themes.get(option.getText());
                 changeTheme();
+                playerGUI.updateGUI(audioPlayer);
                 System.out.println(audioPlayer.getCurrentSong().getSongsTheme());
             });
             add(option);
