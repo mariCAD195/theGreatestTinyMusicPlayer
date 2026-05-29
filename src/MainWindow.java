@@ -65,6 +65,7 @@ public class MainWindow extends JFrame {
 
             library.getPlaylistPanel().addPlaylist(newPlaylist);
             library.getPlaylistPanel().loadPanel(cardLayout,cards);
+            library.getPlaylistPanel().repaint();
         });
 
         customization.getBack().addActionListener(e -> {

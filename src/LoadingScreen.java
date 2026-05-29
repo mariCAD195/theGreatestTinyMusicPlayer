@@ -18,6 +18,7 @@ public class LoadingScreen extends JFrame {
 
         ImageIcon icon = DataLoading.loadAssets("res/assets/heartIcon.png",60,60);
         setIconImage(icon.getImage());
+        getContentPane().setBackground(new Color(218, 138, 145));
 
         panel = new JPanel();
         panel();
@@ -25,10 +26,11 @@ public class LoadingScreen extends JFrame {
     }
 
     public void panel(){
-        panel.setBackground(new Color(221, 162, 163));
+        panel.setBackground(null);
+        panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 
-        add(Box.createRigidArea(new Dimension(0, 15)));
+        panel.add(Box.createRigidArea(new Dimension(0, 15)));
 
         loadingBar = new JSlider(JSlider.HORIZONTAL,0,100,0);
         Dimension loadingBarDimensions = new Dimension(250,40);
@@ -42,6 +44,7 @@ public class LoadingScreen extends JFrame {
         loadingBar.setBackground(null);
         loadingBar.setSnapToTicks(false);
         loadingBar.setFocusable(false);
+        loadingBar.setEnabled(false);
         loadingBar.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(loadingBar);
 
